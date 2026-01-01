@@ -16,14 +16,22 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            RolePermissionSeeder::class,
-            SchoolInformationSeeder::class,
-            SchoolClassSeeder::class,
-            WebsiteContentSeeder::class,
+            RoleSeeder::class,
+            PermissionSeeder::class,
             UserSeeder::class,
-            StudentSeeder::class,
-            PaymentSeeder::class,
-            TestAccountsSeeder::class, // Add test accounts
+            SchoolInformationSeeder::class,
+            AboutPageContentSeeder::class,
+            TeamMemberSeeder::class,
+            HistoryTimelineSeeder::class,
+            HomepageSliderSeeder::class,
+            HomepageSectionSeeder::class,
+            HomepageFeatureSeeder::class,
+            HomepageFaqSeeder::class,
+            SessionTimeSeeder::class,
+            BreadcrumbSeeder::class,
+            SchoolClassSeeder::class,
+            GalleryImageSeeder::class,
+            ContactInformationSeeder::class,
         ]);
     }
 }
