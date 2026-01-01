@@ -11,75 +11,125 @@
         <div class="breadcumb-content">
             <h1 class="breadcumb-title">{{ $breadcrumb['title'] ?? 'Contact Us' }}</h1>
             <p class="breadcumb-text">{{ $breadcrumb['paragraph'] ?? 'Get in touch with us' }}</p>
+            <div class="breadcumb-menu-wrap">
+                <ul class="breadcumb-menu">
+                    <li><a href="{{ route('website.homepage') }}">Home</a></li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
 @endif
 
-<!-- Contact Section -->
-<section class="space-top space-extra-bottom">
+<section class=" space-top space-extra-bottom ">
     <div class="container">
-        <div class="row gx-60">
-            <div class="col-lg-6">
-                <div class="title-area">
-                    <h2 class="sec-title">Get In Touch</h2>
-                    <p class="sec-text">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
-                </div>
-                <div class="contact-info">
-                    @if($address ?? null)
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Address</h4>
-                                <p>{{ $address }}</p>
-                            </div>
-                        </div>
-                    @endif
-                    @if($phone ?? null)
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p><a href="tel:{{ $phone }}">{{ $phone }}</a></p>
-                            </div>
-                        </div>
-                    @endif
-                    @if($email ?? null)
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p><a href="mailto:{{ $email }}">{{ $email }}</a></p>
-                            </div>
-                        </div>
-                    @endif
+        <div class="row">
+            <div class="col-md-4">
+                <div class="info-style2">
+                    <div class="info-icon"><img src="{{ asset('selected/assets/img/icon/c-b-1-1.svg') }}" alt="icon"></div>
+                    <h3 class="info-title">Phone No</h3>
+                    <p class="info-text"><a href="tel:{{ $phone ?? '#' }}" class="text-inherit">{{ $phone ?? 'N/A' }}</a></p>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <form action="{{ url('/api/website/contact/submit') }}" method="POST" class="contact-form">
+            <div class="col-md-4">
+                <div class="info-style2">
+                    <div class="info-icon"><img src="{{ asset('selected/assets/img/icon/c-b-1-2.svg') }}" alt="icon"></div>
+                    <h3 class="info-title">Monday to Friday</h3>
+                    <p class="info-text">8.30am – 02.00pm</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-style2">
+                    <div class="info-icon"><img src="{{ asset('selected/assets/img/icon/c-b-1-3.svg') }}" alt="icon"></div>
+                    <h3 class="info-title">Email Address</h3>
+                    <p class="info-text"><a href="mailto:{{ $email ?? '#' }}" class="text-inherit">{{ $email ?? 'N/A' }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class=" space-extra-bottom ">
+    <div class="container">
+        <div class="row flex-row-reverse gx-60 justify-content-between">
+            <div class="col-xl-auto">
+                <img src="{{ asset('selected/assets/img/about/con-2-1.png') }}" alt="girl" class="w-100">
+            </div>
+            <div class="col-xl col-xxl-6 align-self-center">
+                <div class="title-area">
+                    <span class="sec-subtitle">Have Any questions? so plese</span>
+                    <h2 class="sec-title">Feel Free to Contact!</h2>
+                </div>
+                
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('website.contact.submit') }}" method="POST" class="form-style3 layout2">
                     @csrf
-                    <div class="form-group">
-                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 form-group">
+                            <label>First Name <span class="required">(Required)</span></label>
+                            <input name="name" type="text" value="{{ old('name') }}" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Last Name <span class="required">(Required)</span></label>
+                            <input name="last_name" type="text" value="{{ old('last_name') }}" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Email Address <span class="required">(Required)</span></label>
+                            <input name="email" type="email" value="{{ old('email') }}" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Phone Number <span class="required">(Required)</span></label>
+                            <input name="phone" type="tel" value="{{ old('phone') }}" required>
+                        </div>
+                        <div class="col-12 form-group">
+                            <label>Message <span class="required">(Required)</span></label>
+                            <textarea name="message" cols="30" rows="10"
+                                placeholder="Type your message" required>{{ old('message') }}</textarea>
+                        </div>
+                        <div class="col-auto form-group">
+                            <button class="vs-btn" type="submit">Send Message</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="vs-btn">Send Message</button>
                 </form>
             </div>
         </div>
-        @if($google_map_embed_url ?? null)
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="map-wrapper">
-                    {!! $google_map_embed_url !!}
-                </div>
-            </div>
+    </div>
+</section>
+
+<section class=" space-bottom">
+    <div class="container">
+        <div class="title-area">
+            <h2 class="mt-n2">How To Find Us</h2>
         </div>
-        @endif
+        <div class="map-style1">
+            @if($google_map_embed_url ?? null)
+            <iframe
+                    src=" {!! $google_map_embed_url !!}"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            @else
+                <iframe
+                    src=" {!! $google_map_embed_url !!}"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            @endif
+        </div>
     </div>
 </section>
 @endsection

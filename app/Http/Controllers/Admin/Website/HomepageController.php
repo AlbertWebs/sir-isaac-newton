@@ -61,6 +61,7 @@ class HomepageController extends Controller
         $validated = $request->validate([
             'image' => ['required', 'image', 'max:5120'],
             'text' => ['nullable', 'string', 'max:500'],
+            'description' => ['nullable', 'string'],
             'button_text' => ['nullable', 'string', 'max:100'],
             'button_link' => ['nullable', 'string', 'max:255'],
             'order' => ['nullable', 'integer', 'min:0'],
@@ -98,6 +99,7 @@ class HomepageController extends Controller
         $validated = $request->validate([
             'image' => ['nullable', 'image', 'max:5120'],
             'text' => ['nullable', 'string', 'max:500'],
+            'description' => ['nullable', 'string'],
             'button_text' => ['nullable', 'string', 'max:100'],
             'button_link' => ['nullable', 'string', 'max:255'],
             'order' => ['nullable', 'integer', 'min:0'],
@@ -172,8 +174,10 @@ class HomepageController extends Controller
             'button_link' => ['nullable', 'string', 'max:255'],
             'background_image' => ['nullable', 'image', 'max:5120'],
             'icon' => ['nullable', 'string', 'max:100'],
-            'images' => ['nullable', 'array', 'max:4'],
-            'images.*' => ['image', 'max:5120'],
+            'images.image_1' => ['nullable', 'image', 'max:5120'],
+            'images.image_2' => ['nullable', 'image', 'max:5120'],
+            'images.image_3' => ['nullable', 'image', 'max:5120'],
+            'images.image_4' => ['nullable', 'image', 'max:5120'],
             'content' => ['nullable', 'string'],
             'is_visible' => ['nullable', 'boolean'],
         ]);
@@ -182,11 +186,14 @@ class HomepageController extends Controller
             $validated['background_image'] = $request->file('background_image')->store('website/sections', 'public');
         }
 
-        if ($request->hasFile('images')) {
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('website/sections', 'public');
+        $imagePaths = [];
+        for ($i = 1; $i <= 4; $i++) {
+            $imageKey = 'images.image_' . $i;
+            if ($request->hasFile($imageKey)) {
+                $imagePaths['image_' . $i] = $request->file($imageKey)->store('website/sections', 'public');
             }
+        }
+        if (!empty($imagePaths)) {
             $validated['images'] = $imagePaths;
         }
 
@@ -223,8 +230,10 @@ class HomepageController extends Controller
             'button_link' => ['nullable', 'string', 'max:255'],
             'background_image' => ['nullable', 'image', 'max:5120'],
             'icon' => ['nullable', 'string', 'max:100'],
-            'images' => ['nullable', 'array', 'max:4'],
-            'images.*' => ['image', 'max:5120'],
+            'images.image_1' => ['nullable', 'image', 'max:5120'],
+            'images.image_2' => ['nullable', 'image', 'max:5120'],
+            'images.image_3' => ['nullable', 'image', 'max:5120'],
+            'images.image_4' => ['nullable', 'image', 'max:5120'],
             'content' => ['nullable', 'string'],
             'is_visible' => ['nullable', 'boolean'],
         ]);
@@ -236,20 +245,26 @@ class HomepageController extends Controller
             $validated['background_image'] = $request->file('background_image')->store('website/sections', 'public');
         }
 
-        if ($request->hasFile('images')) {
-            // Delete old images
-            if ($section->images) {
-                foreach ($section->images as $oldImage) {
-                    Storage::disk('public')->delete($oldImage);
+        // Handle individual images for 'about' section
+        $currentImages = is_string($section->images) ? json_decode($section->images, true) : ($section->images ?? []);
+        $updatedImages = $currentImages;
+
+        for ($i = 1; $i <= 4; $i++) {
+            $imageKey = 'images.image_' . $i;
+            if ($request->hasFile($imageKey)) {
+                // Delete old image if it exists
+                if (isset($currentImages['image_' . $i]) && $currentImages['image_' . $i]) {
+                    Storage::disk('public')->delete($currentImages['image_' . $i]);
                 }
+                // Store new image
+                $updatedImages['image_' . $i] = $request->file($imageKey)->store('website/sections', 'public');
+            } else if ($request->missing('images.image_' . $i) && isset($currentImages['image_' . $i])) {
+                // If input field is empty and an old image existed, delete it
+                Storage::disk('public')->delete($currentImages['image_' . $i]);
+                unset($updatedImages['image_' . $i]);
             }
-            // Store new images
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('website/sections', 'public');
-            }
-            $validated['images'] = $imagePaths;
         }
+        $validated['images'] = array_filter($updatedImages); // Remove null/empty entries if images were deleted
 
         $validated['is_visible'] = $request->has('is_visible');
 

@@ -59,9 +59,22 @@ class ClassesController extends Controller
         $validated = $request->validate([
             'website_description' => ['nullable', 'string', 'max:1000'],
             'website_visible' => ['nullable', 'boolean'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
         $validated['website_visible'] = $request->has('website_visible');
+
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($class->image && file_exists(public_path($class->image))) {
+                unlink(public_path($class->image));
+            }
+
+            // Store new image
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('selected/assets/img/class'), $imageName);
+            $validated['image'] = 'selected/assets/img/class/' . $imageName;
+        }
 
         $class->update($validated);
 

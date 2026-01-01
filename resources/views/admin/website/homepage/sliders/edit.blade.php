@@ -69,6 +69,28 @@
                     @enderror
                 </div>
 
+                <div class="md:col-span-2 group">
+                    <label for="description" class="block text-sm font-medium text-gray-700 mb-2 group-focus-within:text-purple-600 transition-colors">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-gray-400 group-focus-within:text-purple-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                            </svg>
+                            Slider Description
+                        </span>
+                    </label>
+                    <textarea id="description" name="description" rows="3" maxlength="500"
+                        class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 shadow-sm hover:shadow-md focus:shadow-lg bg-white"
+                        placeholder="e.g., A nurturing and holistic approach to learning">{{ old('description', $slider->description) }}</textarea>
+                    @error('description')
+                        <p class="text-red-500 text-xs mt-1.5 flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+
                 <div class="group">
                     <label for="button_text" class="block text-sm font-medium text-gray-700 mb-2 group-focus-within:text-purple-600 transition-colors">
                         <span class="flex items-center">

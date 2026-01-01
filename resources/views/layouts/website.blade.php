@@ -61,12 +61,13 @@
             </div>
             <div class="vs-mobile-menu">
                 <ul>
-                    <li><a href="{{ route('website.homepage') }}">Home</a></li>
-                    <li><a href="{{ route('website.about') }}">About Us</a></li>
-                    <li><a href="{{ route('website.classes') }}">Classes</a></li>
-                    <li><a href="{{ route('website.gallery') }}">Gallery</a></li>
-                    <li><a href="{{ route('website.contact') }}">Contact Us</a></li>
-                    <li><a href="{{ route('website.enroll') }}">Enroll</a></li>
+                    <li class="{{ request()->routeIs('website.homepage') ? 'active' : '' }}"><a href="{{ route('website.homepage') }}">Home</a></li>
+                    <li class="{{ request()->routeIs('website.about') ? 'active' : '' }}"><a href="{{ route('website.about') }}">About Us</a></li>
+                    <li class="{{ request()->routeIs('website.classes') ? 'active' : '' }}"><a href="{{ route('website.classes') }}">Classes</a></li>
+                    <li class="{{ request()->routeIs('website.gallery') ? 'active' : '' }}"><a href="{{ route('website.gallery') }}">Gallery</a></li>
+                    <li class="{{ request()->routeIs('website.clubs') ? 'active' : '' }}"><a href="{{ route('website.clubs') }}">Clubs</a></li>
+                    <li class="{{ request()->routeIs('website.contact') ? 'active' : '' }}"><a href="{{ route('website.contact') }}">Contact Us</a></li>
+                    <li class="{{ request()->routeIs('website.enroll') ? 'active' : '' }}"><a href="{{ route('website.enroll') }}">Enroll</a></li>
                 </ul>
             </div>
         </div>
@@ -169,11 +170,12 @@
                         <div class="col text-end text-lg-center">
                             <nav class="main-menu menu-style1 d-none d-lg-block">
                                 <ul>
-                                    <li><a href="{{ route('website.homepage') }}">Home</a></li>
-                                    <li><a href="{{ route('website.about') }}">About Us</a></li>
-                                    <li><a href="{{ route('website.classes') }}">Classes</a></li>
-                                    <li><a href="{{ route('website.gallery') }}">Gallery</a></li>
-                                    <li><a href="{{ route('website.contact') }}">Contact</a></li>
+                                    <li class="{{ request()->routeIs('website.homepage') ? 'active' : '' }}"><a href="{{ route('website.homepage') }}">Home</a></li>
+                                    <li class="{{ request()->routeIs('website.about') ? 'active' : '' }}"><a href="{{ route('website.about') }}">About Us</a></li>
+                                    <li class="{{ request()->routeIs('website.classes') ? 'active' : '' }}"><a href="{{ route('website.classes') }}">Classes</a></li>
+                                    <li class="{{ request()->routeIs('website.gallery') ? 'active' : '' }}"><a href="{{ route('website.gallery') }}">Gallery</a></li>
+                                    <li class="{{ request()->routeIs('website.clubs') ? 'active' : '' }}"><a href="{{ route('website.clubs') }}">Clubs</a></li>
+                                    <li class="{{ request()->routeIs('website.contact') ? 'active' : '' }}"><a href="{{ route('website.contact') }}">Contact</a></li>
                                 </ul>
                             </nav>
                             <button class="vs-menu-toggle d-inline-block d-lg-none"><i class="fal fa-bars"></i></button>
@@ -261,12 +263,13 @@
                             <h3 class="widget_title">Quick Links</h3>
                             <div class="menu-all-pages-container footer-menu">
                                 <ul class="menu">
-                                    <li><a href="{{ route('website.homepage') }}">Home</a></li>
-                                    <li><a href="{{ route('website.about') }}">About Us</a></li>
-                                    <li><a href="{{ route('website.classes') }}">Classes</a></li>
-                                    <li><a href="{{ route('website.gallery') }}">Gallery</a></li>
-                                    <li><a href="{{ route('website.contact') }}">Contact Us</a></li>
-                                    <li><a href="{{ route('website.enroll') }}">Enroll</a></li>
+                                    <li class="{{ request()->routeIs('website.homepage') ? 'active' : '' }}"><a href="{{ route('website.homepage') }}">Home</a></li>
+                                    <li class="{{ request()->routeIs('website.about') ? 'active' : '' }}"><a href="{{ route('website.about') }}">About Us</a></li>
+                                    <li class="{{ request()->routeIs('website.classes') ? 'active' : '' }}"><a href="{{ route('website.classes') }}">Classes</a></li>
+                                    <li class="{{ request()->routeIs('website.gallery') ? 'active' : '' }}"><a href="{{ route('website.gallery') }}">Gallery</a></li>
+                                    <li class="{{ request()->routeIs('website.clubs') ? 'active' : '' }}"><a href="{{ route('website.clubs') }}">Clubs</a></li>
+                                    <li class="{{ request()->routeIs('website.contact') ? 'active' : '' }}"><a href="{{ route('website.contact') }}">Contact Us</a></li>
+                                    <li class="{{ request()->routeIs('website.enroll') ? 'active' : '' }}"><a href="{{ route('website.enroll') }}">Enroll</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -287,7 +290,7 @@
                     </div>
                     <div class="col-lg-auto">
                         <p class="copyright-text">
-                            Copyright &copy; {{ date('Y') }} <a href="{{ route('website.homepage') }}">Sir Isaac Newton School</a>. All Rights Reserved.
+                            Copyright &copy; {{ date('Y') }} <a href="{{ route('website.homepage') }}">Sir Isaac Newton School</a>. All Rights Reserved. | Powered By <a href="https://designekta.com" target="_blank">Designekta Studios</a>
                         </p>
                     </div>
                 </div>

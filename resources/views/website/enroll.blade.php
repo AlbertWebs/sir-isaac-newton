@@ -11,6 +11,12 @@
         <div class="breadcumb-content">
             <h1 class="breadcumb-title">{{ $breadcrumb['title'] ?? 'Enrollment' }}</h1>
             <p class="breadcumb-text">{{ $breadcrumb['paragraph'] ?? 'Apply for admission' }}</p>
+            <div class="breadcumb-menu-wrap">
+                <ul class="breadcumb-menu">
+                    <li><a href="{{ route('website.homepage') }}">Home</a></li>
+                    <li>Enrollment</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
@@ -22,30 +28,16 @@
         <div class="row">
             <div class="col-xl-auto col-xxl-6">
                 <div class="img-box6">
-                    <div class="img-1 mega-hover"><img src="{{ asset('selected/assets/img/about/con-1-1.jpg') }}" alt="image"></div>
-                    <div class="img-2 mega-hover"><img src="{{ asset('selected/assets/img/about/con-1-2.jpg') }}" alt="image"></div>
+                    <div class="img-1 mega-hover"><img style="max-width:440px;" src="{{ $enroll_image_1 ?? asset('selected/assets/img/about/con-1-1.jpg') }}" alt="image"></div>
+                    <div class="img-2 mega-hover"><img style="max-width:440px;" src="{{ $enroll_image_2 ?? asset('selected/assets/img/about/con-1-2.jpg') }}" alt="image"></div>
                 </div>
             </div>
             <div class="col-xl col-xxl-6 align-self-center">
                 <h2 class="sec-title mb-3">Apply for Admission</h2>
                 
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                <div id="form-messages"></div>
 
-                @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <form action="{{ route('website.enroll.submit') }}" method="POST" class="form-style3">
+                <form action="{{ route('website.enroll.submit') }}" method="POST" class="form-style3" id="enrollment-form">
                     @csrf
                     <div class="row justify-content-between">
                         <div class="col-md-6 form-group">
@@ -88,7 +80,8 @@
                             <label for="notify_progress">Notify me about my child's weekly progress</label>
                         </div>
                         <div class="col-auto form-group">
-                            <button class="vs-btn" type="submit">Apply Now</button>
+                            <button class="vs-btn" type="submit" id="enrollment-submit-btn">Apply Now</button>
+                            <span id="loading-spinner" class="spinner-border spinner-border-sm text-primary ms-2" role="status" aria-hidden="true" style="display: none;"></span>
                         </div>
                     </div>
                 </form>
@@ -97,4 +90,50 @@
     </div>
 </section>
 @endsection
+
+@push('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#enrollment-form').on('submit', function(e) {
+        e.preventDefault();
+
+        var formData = $(this).serialize();
+        var formMessages = $('#form-messages');
+        var submitBtn = $('#enrollment-submit-btn');
+        var loadingSpinner = $('#loading-spinner');
+        
+        formMessages.empty(); // Clear previous messages
+        submitBtn.prop('disabled', true); // Disable button during submission
+        loadingSpinner.show(); // Show spinner
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                formMessages.html('<div class="alert alert-success">' + response.message + '</div>');
+                $('#enrollment-form')[0].reset(); // Clear the form
+            },
+            error: function(xhr) {
+                var errors = xhr.responseJSON.errors;
+                var errorHtml = '<div class="alert alert-danger"><ul class="mb-0">';
+                $.each(errors, function(key, value) {
+                    errorHtml += '<li>' + value + '</li>';
+                });
+                errorHtml += '</ul></div>';
+                formMessages.html(errorHtml);
+            },
+            complete: function() {
+                submitBtn.prop('disabled', false); // Enable button
+                loadingSpinner.hide(); // Hide spinner
+            }
+        });
+    });
+});
+</script>
+@endpush
 

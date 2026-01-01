@@ -12,18 +12,26 @@
         </div>
 
         <div class="p-6">
-            <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="grid md:grid-cols-2 gap-6 mb-6 p-4 bg-gray-50 rounded-lg shadow-inner">
                 <div>
-                    <p class="text-sm font-medium text-gray-700 mb-1">Name</p>
-                    <p class="text-gray-900 text-lg">{{ $submission->name }}</p>
+                    <p class="text-sm font-medium text-gray-700 mb-1">First Name</p>
+                    <p class="text-gray-900 text-lg font-semibold">{{ $submission->first_name }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Last Name</p>
+                    <p class="text-gray-900 text-lg font-semibold">{{ $submission->last_name }}</p>
                 </div>
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Email</p>
-                    <p class="text-gray-900 text-lg">{{ $submission->email }}</p>
+                    <p class="text-gray-900 text-lg font-semibold">{{ $submission->email }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Phone</p>
+                    <p class="text-gray-900 text-lg font-semibold">{{ $submission->phone ?? 'N/A' }}</p>
                 </div>
                 <div class="md:col-span-2">
                     <p class="text-sm font-medium text-gray-700 mb-1">Submitted</p>
-                    <p class="text-gray-600">{{ $submission->created_at->format('F d, Y \a\t g:i A') }}</p>
+                    <p class="text-gray-600 text-base">{{ $submission->created_at->format('F d, Y \a\t g:i A') }}</p>
                 </div>
             </div>
 

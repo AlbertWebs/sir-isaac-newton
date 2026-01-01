@@ -119,12 +119,22 @@ class ContactController extends Controller
     public function submit(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['nullable', 'string', 'max:255'], // Keep for old forms or if we decide to combine
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
+            'phone' => ['required', 'string', 'max:20'],
             'message' => ['required', 'string', 'max:5000'],
         ]);
 
-        ContactSubmission::create($validated);
+        ContactSubmission::create([
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'name' => $validated['first_name'] . ' ' . $validated['last_name'], // Concatenate for the existing 'name' field
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'message' => $validated['message'],
+        ]);
 
         return response()->json([
             'success' => true,

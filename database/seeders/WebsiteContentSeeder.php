@@ -20,13 +20,38 @@ class WebsiteContentSeeder extends Seeder
     {
         // Homepage Slider
         HomepageSlider::firstOrCreate(
-            ['text' => 'Creating World Changers'],
+            ['text' => 'We Prepare Your Child For Life'],
             [
-                'image' => null, // Will be uploaded via admin
-                'text' => 'Creating World Changers',
-                'button_text' => 'Learn More',
-                'button_link' => '/about',
+                'image' => 'assets/img/hero/hero-1-1.jpg',
+                'text' => 'We Prepare Your Child For Life',
+                'description' => 'Montessori Is A Nurturing And Holistic Approach To Learning',
+                'button_text' => 'Apply Today',
+                'button_link' => '/contact',
                 'order' => 1,
+                'is_visible' => true,
+            ]
+        );
+        HomepageSlider::firstOrCreate(
+            ['text' => 'Special Child Session For Brain Growth'],
+            [
+                'image' => 'assets/img/hero/hero-1-2.jpg',
+                'text' => 'Special Child Session For Brain Growth',
+                'description' => 'Montessori Is A Nurturing And Holistic Approach To Learning',
+                'button_text' => 'Apply Today',
+                'button_link' => '/contact',
+                'order' => 2,
+                'is_visible' => true,
+            ]
+        );
+        HomepageSlider::firstOrCreate(
+            ['text' => 'Best Children Study And Furture Care'],
+            [
+                'image' => 'assets/img/hero/hero-1-3.jpg',
+                'text' => 'Best Children Study And Furture Care',
+                'description' => 'Montessori Is A Nurturing And Holistic Approach To Learning',
+                'button_text' => 'Apply Today',
+                'button_link' => '/contact',
+                'order' => 3,
                 'is_visible' => true,
             ]
         );
@@ -36,14 +61,19 @@ class WebsiteContentSeeder extends Seeder
             ['section_type' => 'about'],
             [
                 'section_type' => 'about',
-                'title' => 'About Our School',
-                'heading' => 'Creating World Changers',
-                'paragraph' => 'We nurture children through quality education and holistic development.',
-                'button_text' => 'Read More',
+                'title' => 'Part of the family since 2001',
+                'heading' => 'Your Child Will Take The Lead Learning',
+                'paragraph' => 'We are constantly expanding the range of services offered, taking care of children of all ages. Our goal is to carefully educate and develop children in a fun way. We strive to turn the learning process into a bright event so that children study with pleasure.',
+                'button_text' => 'Learn More',
                 'button_link' => '/about',
                 'background_image' => null,
                 'icon' => null,
-                'images' => null, // 4 images to be uploaded via admin
+                'images' => json_encode([
+                    'image_1' => 'website/sections/ab-1-1.jpg',
+                    'image_2' => 'website/sections/ab-1-2.jpg',
+                    'image_3' => 'website/sections/ab-1-3.jpg',
+                    'image_4' => 'website/sections/ab-1-4.jpg',
+                ]),
                 'content' => null,
                 'is_visible' => true,
             ]
@@ -125,10 +155,10 @@ class WebsiteContentSeeder extends Seeder
         // Session Times
         $sessionTimes = [
             [
-                'background_image' => null,
-                'title' => 'Our Schedule',
-                'icon' => 'clock',
-                'paragraph' => 'Flexible session times to accommodate your needs.',
+                'background_image' => 'assets/img/bg/table-bg-1-1.jpg',
+                'title' => 'Session Times',
+                'icon' => 'fal fa-alarm-clock',
+                'paragraph' => 'We provide full day care from 8.30am to 3.30pm for children aged 18 months to 5 years,',
                 'label' => 'Early Drop Off',
                 'time_range' => '8.00am – 10.00am',
                 'order' => 1,
@@ -140,7 +170,7 @@ class WebsiteContentSeeder extends Seeder
                 'icon' => null,
                 'paragraph' => null,
                 'label' => 'Morning',
-                'time_range' => '10.30am – 12.00pm',
+                'time_range' => '10.30am – 12.00am',
                 'order' => 2,
                 'is_visible' => true,
             ],
@@ -150,7 +180,7 @@ class WebsiteContentSeeder extends Seeder
                 'icon' => null,
                 'paragraph' => null,
                 'label' => 'Lunch',
-                'time_range' => '12.00pm – 1.00pm',
+                'time_range' => '12noon – 1.00pm',
                 'order' => 3,
                 'is_visible' => true,
             ],
@@ -160,7 +190,7 @@ class WebsiteContentSeeder extends Seeder
                 'icon' => null,
                 'paragraph' => null,
                 'label' => 'Afternoon',
-                'time_range' => '2.00pm – 4.00pm',
+                'time_range' => '2.00am – 4.00am',
                 'order' => 4,
                 'is_visible' => true,
             ],
@@ -194,35 +224,43 @@ class WebsiteContentSeeder extends Seeder
         // FAQs
         $faqs = [
             [
-                'title' => 'Guide to Preschool',
-                'heading' => 'Frequently Asked Questions',
-                'question' => 'What age groups do you accept?',
-                'answer' => 'We accept children from Daycare through Grade 6, including PP1 and PP2.',
+                'title' => 'Choose your own grade level',
+                'heading' => 'Guide to Preschool',
+                'question' => 'First Little Readers (Levels A-C)',
+                'answer' => 'Enrolment Events are like open days or open weeks at Busy Bees. It\'s a chance for you to visit your local nursery, take a look around, and see some of exciting activities in action.',
                 'order' => 1,
                 'is_visible' => true,
             ],
             [
                 'title' => null,
                 'heading' => null,
-                'question' => 'What are your operating hours?',
-                'answer' => 'We offer flexible session times: Early Drop Off (8.00am – 10.00am), Morning (10.30am – 12.00pm), Lunch (12.00pm – 1.00pm), and Afternoon (2.00pm – 4.00pm).',
+                'question' => 'What Age Do Kids Start Preschool?',
+                'answer' => 'Enrolment Events are like open days or open weeks at Busy Bees. It\'s a chance for you to visit your local nursery, take a look around, and see some of exciting activities in action.',
                 'order' => 2,
                 'is_visible' => true,
             ],
             [
                 'title' => null,
                 'heading' => null,
-                'question' => 'Do you provide meals?',
-                'answer' => 'Yes, we provide healthy and nutritious meals prepared with care for all our students.',
+                'question' => 'Is My Child Ready for Preschool?',
+                'answer' => 'Enrolment Events are like open days or open weeks at Busy Bees. It\'s a chance for you to visit your local nursery, take a look around, and see some of exciting activities in action.',
                 'order' => 3,
                 'is_visible' => true,
             ],
             [
                 'title' => null,
                 'heading' => null,
-                'question' => 'What safety measures are in place?',
-                'answer' => 'We maintain a secure environment with comprehensive safety protocols and trained staff.',
+                'question' => 'Can your child separate from you?',
+                'answer' => 'Enrolment Events are like open days or open weeks at Busy Bees. It\'s a chance for you to visit your local nursery, take a look around, and see some of exciting activities in action.',
                 'order' => 4,
+                'is_visible' => true,
+            ],
+            [
+                'title' => null,
+                'heading' => null,
+                'question' => 'Can your child play with others?',
+                'answer' => 'Enrolment Events are like open days or open weeks at Busy Bees. It\'s a chance for you to visit your local nursery, take a look around, and see some of exciting activities in action.',
+                'order' => 5,
                 'is_visible' => true,
             ],
         ];
@@ -236,30 +274,120 @@ class WebsiteContentSeeder extends Seeder
 
         // Breadcrumbs
         $breadcrumbs = [
-            ['page_key' => 'about', 'title' => 'About Us', 'paragraph' => 'Learn more about our school'],
-            ['page_key' => 'classes', 'title' => 'Our Classes', 'paragraph' => 'Explore our grade levels'],
-            ['page_key' => 'gallery', 'title' => 'Gallery', 'paragraph' => 'View our school activities'],
-            ['page_key' => 'contact', 'title' => 'Contact Us', 'paragraph' => 'Get in touch with us'],
+            ['page_key' => 'about', 'title' => 'About Us', 'paragraph' => 'Montessori Is A Nurturing And Holistic Approach To Learning', 'background_image' => 'assets/img/breadcumb/breadcumb-bg.jpg'],
+            ['page_key' => 'classes', 'title' => 'Our Classes', 'paragraph' => 'Montessori Is A Nurturing And Holistic Approach To Learning', 'background_image' => 'assets/img/breadcumb/breadcumb-bg.jpg'],
+            ['page_key' => 'gallery', 'title' => 'Gallery', 'paragraph' => 'Montessori Is A Nurturing And Holistic Approach To Learning', 'background_image' => 'assets/img/breadcumb/breadcumb-bg.jpg'],
+            ['page_key' => 'contact', 'title' => 'Contact Us', 'paragraph' => 'Montessori Is A Nurturing And Holistic Approach To Learning', 'background_image' => 'assets/img/breadcumb/breadcumb-bg.jpg'],
+            ['page_key' => 'enroll', 'title' => 'Enroll Now', 'paragraph' => 'Montessori Is A Nurturing And Holistic Approach To Learning', 'background_image' => 'assets/img/breadcumb/breadcumb-bg.jpg'],
         ];
 
         foreach ($breadcrumbs as $breadcrumb) {
             Breadcrumb::firstOrCreate(
                 ['page_key' => $breadcrumb['page_key']],
-                array_merge($breadcrumb, ['background_image' => null])
+                $breadcrumb
             );
         }
 
-        // About Page Content
+        // About Page Content (About the School)
         AboutPageContent::firstOrCreate(
             ['section_type' => 'about_school'],
             [
                 'section_type' => 'about_school',
-                'image' => null,
-                'title' => 'About Sir Isaac Newton School',
-                'paragraph' => 'We are committed to providing quality education and holistic development for every child.',
+                'image' => 'assets/img/about/ab-2-1.jpg',
+                'title' => 'Your child\'s best start in life',
+                'paragraph' => 'We are constantly expanding the range of services offered, taking children of all ages. Our goal is to carefully educate and develop a fun way. We strive to turn the learning process.',
                 'name' => null,
                 'description' => null,
-                'order' => 0,
+                'order' => 1,
+                'is_visible' => true,
+            ]
+        );
+
+        // Our Team
+        TeamMember::firstOrCreate(
+            ['name' => 'Katie Willmore'],
+            [
+                'image' => 'assets/img/team/t-1-1.jpg',
+                'name' => 'Katie Willmore',
+                'position' => 'Principal and Manager',
+                'bio' => 'Katie is the principal and manager, dedicated to fostering a nurturing learning environment.',
+                'order' => 1,
+                'is_visible' => true,
+            ]
+        );
+        TeamMember::firstOrCreate(
+            ['name' => 'Jessica Levis'],
+            [
+                'image' => 'assets/img/team/t-1-2.jpg',
+                'name' => 'Jessica Levis',
+                'position' => 'Senior Teacher',
+                'bio' => 'Jessica is a passionate and experienced senior teacher committed to student success.',
+                'order' => 2,
+                'is_visible' => true,
+            ]
+        );
+        TeamMember::firstOrCreate(
+            ['name' => 'Nomina Leione'],
+            [
+                'image' => 'assets/img/team/t-1-3.jpg',
+                'name' => 'Nomina Leione',
+                'position' => 'Admissions Officer',
+                'bio' => 'Nomina handles all admissions, guiding families through the enrollment process.',
+                'order' => 3,
+                'is_visible' => true,
+            ]
+        );
+
+        // Clubs
+        AboutPageContent::firstOrCreate(
+            ['section_type' => 'club', 'name' => 'Early Club'],
+            [
+                'section_type' => 'club',
+                'image' => 'assets/img/feature/fe-1-1.jpg',
+                'title' => 'Early Club',
+                'paragraph' => null,
+                'name' => 'Early Club',
+                'description' => 'Help parents get to work on time, Near the station, Children settled and ready to work',
+                'order' => 1,
+                'is_visible' => true,
+            ]
+        );
+        AboutPageContent::firstOrCreate(
+            ['section_type' => 'club', 'name' => 'Lunch Club'],
+            [
+                'section_type' => 'club',
+                'image' => 'assets/img/feature/fe-1-2.jpg',
+                'title' => 'Lunch Club',
+                'paragraph' => null,
+                'name' => 'Lunch Club',
+                'description' => 'Help parents get to work on time, Near the station, Children settled and ready to work',
+                'order' => 2,
+                'is_visible' => true,
+            ]
+        );
+        AboutPageContent::firstOrCreate(
+            ['section_type' => 'club', 'name' => 'Afternoon Club'],
+            [
+                'section_type' => 'club',
+                'image' => 'assets/img/feature/fe-1-3.jpg',
+                'title' => 'Afternoon Club',
+                'paragraph' => null,
+                'name' => 'Afternoon Club',
+                'description' => 'Help parents get to work on time, Near the station, Children settled and ready to work',
+                'order' => 3,
+                'is_visible' => true,
+            ]
+        );
+        AboutPageContent::firstOrCreate(
+            ['section_type' => 'club', 'name' => 'Music Club'],
+            [
+                'section_type' => 'club',
+                'image' => 'assets/img/feature/fe-1-4.jpg',
+                'title' => 'Music Club',
+                'paragraph' => null,
+                'name' => 'Music Club',
+                'description' => 'Help parents get to work on time, Near the station, Children settled and ready to work',
+                'order' => 4,
                 'is_visible' => true,
             ]
         );
@@ -311,10 +439,10 @@ class WebsiteContentSeeder extends Seeder
         ContactInformation::firstOrCreate(
             ['id' => 1],
             [
-                'address' => null, // To be filled via admin
-                'phone' => null, // To be filled via admin
-                'email' => null, // To be filled via admin
-                'google_map_embed_url' => null, // To be filled via admin
+                'address' => 'First Floor, 10A Chandos Street London New Town W1G 9LE',
+                'phone' => '+44 (0) 207 689 7888',
+                'email' => 'user@domainname.com',
+                'google_map_embed_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d461913.0572571096!2d8.516164543417332!3d50.24088825844987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bd121b354b47fd%3A0x422435029b0c610!2sOffenbach%2C%20Germany!5e0!3m2!1sen!2sbd!4v1693456840610!5m2!1sen!2sbd',
             ]
         );
 

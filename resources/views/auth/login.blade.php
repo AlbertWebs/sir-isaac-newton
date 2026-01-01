@@ -11,8 +11,8 @@
     <div class="w-full max-w-md">
         <div class="bg-white rounded-2xl shadow-xl p-8">
             <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">Global College</h1>
-                <p class="text-gray-600">Billing & Administration System</p>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Sir Isaac Newton School</h1>
+                <p class="text-gray-600">School Management System</p>
             </div>
 
             @if($errors->any())
@@ -21,7 +21,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('login') }}" class="space-y-6">
+            <form method="POST" action="{{ route('admin.login') }}" class="space-y-6">
                 @csrf
 
                 <div>
@@ -68,8 +68,9 @@
             <div class="mt-6 text-center text-sm text-gray-600">
                 <p>Default credentials:</p>
                 <p class="mt-2">
-                    <strong>Super Admin:</strong> admin@globalcollege.edu / password<br>
-                    <strong>Cashier:</strong> cashier@globalcollege.edu / password
+                    <strong>Super Admin:</strong> admin@sirisaacnewton.edu / password<br>
+                    <strong>Admin:</strong> admin@sirisaacnewton.edu / password<br>
+                    <strong>Cashier:</strong> cashier@sirisaacnewton.edu / password
                 </p>
             </div>
 

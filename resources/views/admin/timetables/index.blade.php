@@ -11,21 +11,21 @@
     </div>
     <div class="flex gap-2">
         @if($selectedClass)
-        <a href="{{ route('admin.timetables.download-pdf', ['class_id' => $selectedClass->id, 'academic_year' => $academicYear]) }}" target="_blank" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center">
+        <a href="{{ route('timetables.download-pdf', ['class_id' => $selectedClass->id, 'academic_year' => $academicYear]) }}" target="_blank" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
             Download PDF
         </a>
         @endif
-        <a href="{{ route('admin.timetables.download-pdf', ['academic_year' => $academicYear]) }}" target="_blank" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center">
+        <a href="{{ route('timetables.download-pdf', ['academic_year' => $academicYear]) }}" target="_blank" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
             All Classes PDF
         </a>
         @if(auth()->user()->isSuperAdmin())
-        <a href="{{ route('admin.timetables.create', ['class_id' => $selectedClass?->id]) }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+        <a href="{{ route('timetables.create', ['class_id' => $selectedClass?->id]) }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
             </svg>
@@ -37,7 +37,7 @@
 
 <!-- Filter Section -->
 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-    <form method="GET" action="{{ route('admin.timetables.index') }}" class="space-y-4 md:space-y-0 md:flex md:items-end md:gap-4">
+    <form method="GET" action="{{ route('timetables.index') }}" class="space-y-4 md:space-y-0 md:flex md:items-end md:gap-4">
         <div class="md:w-64">
             <label for="class_id" class="block text-sm font-medium text-gray-700 mb-2">Select Class</label>
             <select 
@@ -255,10 +255,10 @@
                     </span>
                 </div>
                 <div class="flex gap-2">
-                    <a href="{{ route('admin.timetables.index', ['class_id' => $class->id, 'academic_year' => $academicYear]) }}" class="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-center text-sm font-semibold shadow-md hover:shadow-lg">
+                    <a href="{{ route('timetables.index', ['class_id' => $class->id, 'academic_year' => $academicYear]) }}" class="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 text-center text-sm font-semibold shadow-md hover:shadow-lg">
                         View Timetable
                     </a>
-                    <a href="{{ route('admin.timetables.download-pdf', ['class_id' => $class->id, 'academic_year' => $academicYear]) }}" target="_blank" class="px-4 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg">
+                    <a href="{{ route('timetables.download-pdf', ['class_id' => $class->id, 'academic_year' => $academicYear]) }}" target="_blank" class="px-4 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>

@@ -16,6 +16,7 @@ class SchoolClass extends Model
         'code',
         'level',
         'academic_year',
+        'age_range',
         'term',
         'class_teacher_id',
         'capacity',
@@ -25,6 +26,7 @@ class SchoolClass extends Model
         'price',
         'website_visible',
         'website_description',
+        'image',
     ];
 
     protected function casts(): array

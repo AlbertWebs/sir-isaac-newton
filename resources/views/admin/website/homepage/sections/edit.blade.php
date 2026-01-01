@@ -180,6 +180,38 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                         <span class="flex items-center">
                             <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            About Section Images (Max 4 images)
+                        </span>
+                    </label>
+                    <p class="text-xs text-gray-500 mb-4">Upload up to 4 images for the about section. Recommended size: 800x600px. Max size: 5MB per image.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        @for ($i = 1; $i <= 4; $i++)
+                            <div class="p-4 bg-gray-50 rounded-lg border-2 border-gray-200">
+                                <label for="images_image_{{ $i }}" class="block text-sm font-medium text-gray-700 mb-2">Image {{ $i }} (leave empty to keep current)</label>
+                                @if(isset($section->images['image_' . $i]) && $section->images['image_' . $i])
+                                    <img src="{{ asset('storage/' . $section->images['image_' . $i]) }}" alt="Current Image {{ $i }}" class="max-w-full h-32 object-cover rounded-lg shadow-sm mb-3">
+                                @endif
+                                <input type="file" id="images_image_{{ $i }}" name="images[image_{{ $i }}]" accept="image/*"
+                                    class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-sm hover:shadow-md focus:shadow-lg bg-white">
+                                @error('images.image_' . $i)
+                                    <p class="text-red-500 text-xs mt-1.5 flex items-center">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                             </svg>

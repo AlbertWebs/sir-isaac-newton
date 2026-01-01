@@ -53,7 +53,7 @@
                                 <a href="{{ route('teacher-portal.personal-info') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
                                 <a href="{{ route('teacher-portal.settings') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
                                 <hr class="my-1">
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Logout</a>
+                                <a href="{{ route('teacher-portal.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
             </a>
         </div>
     </nav>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+    <form id="logout-form" action="{{ route('teacher-portal.logout') }}" method="POST" style="display: none;">@csrf</form>
     <script>
         function teacherPortal() {
             return {

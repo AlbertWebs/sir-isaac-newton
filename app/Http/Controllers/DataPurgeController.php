@@ -60,7 +60,7 @@ class DataPurgeController extends Controller
         // Verify confirmation text (trim and case-insensitive)
         $confirmText = trim($validated['confirm_text']);
         if (strtoupper($confirmText) !== 'DELETE ALL DATA') {
-            return redirect()->route('data-purge.index')
+            return redirect()->route('admin.data-purge.index')
                 ->with('error', 'Confirmation text does not match. Please type "DELETE ALL DATA" exactly.');
         }
 
@@ -135,12 +135,12 @@ class DataPurgeController extends Controller
                 );
             }
 
-            return redirect()->route('data-purge.index')
+            return redirect()->route('admin.data-purge.index')
                 ->with('success', 'Data purge completed successfully. Purged: ' . implode(', ', $purged));
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('data-purge.index')
+            return redirect()->route('admin.data-purge.index')
                 ->with('error', 'Error purging data: ' . $e->getMessage());
         }
     }

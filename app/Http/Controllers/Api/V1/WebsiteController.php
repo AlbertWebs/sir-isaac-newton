@@ -17,7 +17,10 @@ use App\Models\HistoryTimeline;
 use App\Models\GalleryImage;
 use App\Models\ContactInformation;
 use App\Models\SchoolClass;
+use App\Models\Teacher;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class WebsiteController extends Controller
 {
@@ -50,6 +53,18 @@ class WebsiteController extends Controller
     }
 
     /**
+     * Get enrollment page information
+     */
+    public function enrollInfo()
+    {
+        $info = SchoolInformation::firstOrCreate([]);
+        return response()->json([
+            'enroll_image_1' => $info->enroll_image_1 ? asset('storage/' . $info->enroll_image_1) : null,
+            'enroll_image_2' => $info->enroll_image_2 ? asset('storage/' . $info->enroll_image_2) : null,
+        ]);
+    }
+
+    /**
      * Get homepage data
      */
     public function homepage()
@@ -67,9 +82,30 @@ class WebsiteController extends Controller
                         'button_link' => $slider->button_link,
                     ];
                 }),
-            'about_section' => HomepageSection::where('section_type', 'about')
-                ->where('is_visible', true)
-                ->first(),
+            'about_section' => (
+                function () {
+                    $section = HomepageSection::where('section_type', 'about')
+                        ->where('is_visible', true)
+                        ->first();
+
+                    if ($section) {
+                        $images = is_array($section->images) ? $section->images : [];
+                        return [
+                            'id' => $section->id,
+                            'title' => $section->title,
+                            'heading' => $section->heading,
+                            'paragraph' => $section->paragraph,
+                            'button_text' => $section->button_text,
+                            'button_link' => $section->button_link,
+                            'image_1' => isset($images['image_1']) ? asset('storage/' . $images['image_1']) : null,
+                            'image_2' => isset($images['image_2']) ? asset('storage/' . $images['image_2']) : null,
+                            'image_3' => isset($images['image_3']) ? asset('storage/' . $images['image_3']) : null,
+                            'image_4' => isset($images['image_4']) ? asset('storage/' . $images['image_4']) : null,
+                        ];
+                    }
+                    return null;
+                }
+            )(),
             'features' => HomepageFeature::where('is_visible', true)
                 ->orderBy('order')
                 ->get()
@@ -153,20 +189,15 @@ class WebsiteController extends Controller
                         'title' => $item->title,
                         'feature_label' => $item->feature_label,
                         'description' => $item->description,
+                        'image' => $item->image ? asset('storage/' . $item->image) : null,
                     ];
                 }),
-            'clubs' => AboutPageContent::where('section_type', 'clubs')
-                ->where('is_visible', true)
-                ->orderBy('order')
-                ->get()
-                ->map(function($club) {
-                    return [
-                        'id' => $club->id,
-                        'name' => $club->name,
-                        'image' => $club->image ? asset('storage/' . $club->image) : null,
-                        'description' => $club->description,
-                    ];
-                }),
+            'stats' => [
+                'total_classrooms' => SchoolClass::count(),
+                'total_kids_classes' => SchoolClass::whereIn('level', ['pp1', 'pp2', 'grade_1', 'grade_2', 'grade_3', 'grade_4', 'grade_5', 'grade_6'])->count(),
+                'total_outdoor_activities' => 75, // Placeholder
+                'total_teachers' => Teacher::count(),
+            ],
         ]);
     }
 
@@ -200,10 +231,13 @@ class WebsiteController extends Controller
                 'name' => $class->name,
                 'code' => $class->code,
                 'level' => $class->level,
+                'academic_year' => $class->academic_year,
+                'age_range' => $class->age_range,
                 'description' => $class->website_description ?? $class->description,
                 'capacity' => $class->capacity,
                 'current_enrollment' => $class->students()->count(),
                 'price' => $class->price,
+                'image' => $class->image ? asset('storage/' . $class->image) : null,
             ];
         });
 
@@ -326,6 +360,29 @@ class WebsiteController extends Controller
 
         return response()->json([
             'announcements' => $announcements,
+        ]);
+    }
+
+    /**
+     * Get clubs page data
+     */
+    public function clubs()
+    {
+        $clubs = AboutPageContent::where('section_type', 'clubs')
+            ->where('is_visible', true)
+            ->orderBy('order')
+            ->get()
+            ->map(function($club) {
+                return [
+                    'id' => $club->id,
+                    'name' => $club->name,
+                    'image' => $club->image ? asset('storage/' . $club->image) : null,
+                    'description' => $club->description,
+                ];
+            });
+
+        return response()->json([
+            'clubs' => $clubs,
         ]);
     }
 }

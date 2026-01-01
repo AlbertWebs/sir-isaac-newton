@@ -12,7 +12,7 @@
             <p class="text-green-100 text-sm mt-1">Record a new payment for a student</p>
         </div>
         
-        <form @submit.prevent="submitForm" method="POST" action="{{ route('billing.store') }}" class="p-6">
+        <form @submit.prevent="submitForm" method="POST" action="{{ route('admin.billing.store') }}" class="p-6">
             @csrf
 
             <!-- Student Selection -->
@@ -277,7 +277,7 @@
 
             <!-- Submit Button -->
             <div class="mt-8 pt-6 border-t border-gray-200 flex justify-end space-x-4">
-                <a href="{{ route('dashboard') }}" class="px-6 py-2.5 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 font-medium shadow-sm hover:shadow">
+                <a href="{{ route('admin.dashboard') }}" class="px-6 py-2.5 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 font-medium shadow-sm hover:shadow">
                     Cancel
                 </a>
                 <button 

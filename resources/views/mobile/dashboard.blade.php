@@ -20,7 +20,7 @@
                     <h1 class="text-xl font-bold">Global College</h1>
                     <p class="text-sm text-blue-100">Mobile Dashboard</p>
                 </div>
-                <a href="{{ route('dashboard') }}" class="text-white hover:text-blue-100">
+                <a href="{{ route('admin.dashboard') }}" class="text-white hover:text-blue-100">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>

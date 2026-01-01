@@ -20,6 +20,8 @@ class SchoolInformation extends Model
         'address',
         'website',
         'logo',
+        'enroll_image_1',
+        'enroll_image_2',
         'facilities',
         'programs',
         'social_media',

@@ -11,7 +11,7 @@
             <p class="text-indigo-100 text-sm mt-1">Update website visibility and description</p>
         </div>
 
-        <form method="POST" action="{{ route('admin.website.classes.update', $class) }}" class="p-6">
+        <form method="POST" action="{{ route('admin.website.classes.update', $class) }}" enctype="multipart/form-data" class="p-6">
             @csrf
             @method('PUT')
 
@@ -40,15 +40,33 @@
                 </div>
 
                 <div class="md:col-span-2 group">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="image" class="block text-sm font-medium text-gray-700 mb-2 group-focus-within:text-indigo-600 transition-colors">
                         <span class="flex items-center">
-                            <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            <svg class="w-4 h-4 mr-1 text-gray-400 group-focus-within:text-indigo-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                            Website Visibility
+                            Class Image
                         </span>
                     </label>
+                    @if($class->image)
+                        <div class="mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                            <p class="text-sm font-medium text-gray-700 mb-2">Current Image:</p>
+                            <img src="{{ asset($class->image) }}" alt="Current Image" class="w-48 h-32 object-cover rounded-lg border-2 border-gray-200 shadow-sm">
+                            <p class="text-xs text-gray-500 mt-2">This image will be displayed on the website classes page.</p>
+                        </div>
+                    @endif
+                    <input type="file" id="image" name="image" accept="image/*"
+                        class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 shadow-sm hover:shadow-md focus:shadow-lg bg-white file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                    <p class="text-xs text-gray-500 mt-1.5">Upload a new image for the class (optional). Supported formats: JPEG, PNG, JPG, GIF, SVG. Max size: 2MB.</p>
+                    @error('image')
+                        <p class="text-red-500 text-xs mt-1.5 flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
                     <div class="flex items-center">
                         <input type="checkbox" id="website_visible" name="website_visible" value="1" {{ old('website_visible', $class->website_visible) ? 'checked' : '' }}
                             class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
