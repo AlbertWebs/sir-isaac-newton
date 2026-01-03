@@ -10,7 +10,7 @@
         <p class="text-sm text-gray-600 mt-1">Manage academic classes and their information</p>
     </div>
     @if(auth()->user()->isSuperAdmin())
-    <a href="{{ route('admin.classes.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+    <a href="{{ route('admin.classes.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center" style="background-color: #3B82F6 !important; color: white !important;">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
         </svg>

@@ -155,6 +155,36 @@
                 padding: 3px !important; /* Adjust padding around icons */
             }
             
+            .col-lg-auto.text-center.d-lg-none.d-block a {
+                font-size: 0.9em !important;
+                color: #ffffff !important;
+                font-weight: 700 !important;
+                transition: all 0.3s ease !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                width: 35px !important;
+                height: 35px !important;
+                border-radius: 50% !important;
+                background-color: transparent !important;
+                border: 1px solid #cd9933 !important;
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.2) !important;
+            }
+
+            .col-lg-auto.text-center.d-lg-none.d-block a:hover {
+                color: #ffffff !important;
+                background-color: #cd9933 !important;
+                transform: translateY(-2px) !important;
+                border-color: #cd9933 !important;
+                box-shadow: 0 0 15px rgba(205, 153, 51, 0.8) !important;
+            }
+
+            .col-lg-auto.text-center.d-lg-none.d-block a i {
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                font-size: 1em !important;
+            }
+            
             /* Why Choose Us / Our Features section mobile optimization */
             .service-style1 .service-body {
                 position: relative; /* Enable absolute positioning for children */
@@ -193,6 +223,29 @@
             .d-none-mobile{
                 display: none !important;
             }
+
+        /* Gallery Zoom Button Styling */
+        .gallery-style2 .gallery-img {
+            position: relative; /* Establish positioning context */
+            overflow: hidden;
+        }
+
+        .gallery-style2 .gallery-img .gallery-btn {
+            position: absolute !important; /* Position button absolutely */
+            top: 50% !important; /* Align top edge to vertical center */
+            left: 50% !important; /* Align left edge to horizontal center */
+            transform: translate(-50%, -50%) !important; /* Center the button precisely */
+            z-index: 5 !important; /* Ensure button is above image */
+            opacity: 0 !important; /* Hidden by default */
+            transition: all 0.3s ease !important; /* Smooth transition */
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .gallery-style2 .gallery-img:hover .gallery-btn {
+            opacity: 1 !important; /* Show on hover */
+        }
         }
         @media (min-width: 992px) {
             .main-menu ul li a {
@@ -222,6 +275,7 @@
             .vs-bottom-nav {
                 display: block; /* Show on mobile devices */
             }
+           
         }
 
         .vs-bottom-nav-inner {
@@ -273,6 +327,11 @@
         }
         .vs-bottom-nav-item-center:hover {
             background-color: #e65c00; /* Darker hover for center button */
+        }
+        @media (max-width: 767px) {
+            .header-top{
+                padding:5px !important;
+            }
         }
 
         /* Desktop Social Media Icons Styling */
@@ -464,25 +523,25 @@
                         </div>
                     </div>
                   
-                    <div class="col-lg-auto text-center d-lg-none d-block">
-                                
+                            <div class="col-lg-auto text-center d-lg-none d-block d-flex justify-content-center align-items-center gap-2">
                                 @if(isset($schoolInfoForLayout->social_media) && is_array($schoolInfoForLayout->social_media))
                                     @if(!empty($schoolInfoForLayout->social_media['facebook']))
+                                        <a href="{{ $schoolInfoForLayout->social_media['facebook'] }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
                                     @endif
                                     @if(!empty($schoolInfoForLayout->social_media['twitter']))
-                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['twitter'] }}" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
+                                        <a href="{{ $schoolInfoForLayout->social_media['twitter'] }}" target="_blank"><i class="fab fa-twitter"></i></a>
                                     @endif
                                     @if(!empty($schoolInfoForLayout->social_media['linkedin']))
-                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['linkedin'] }}" target="_blank"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                                        <a href="{{ $schoolInfoForLayout->social_media['linkedin'] }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                                     @endif
                                     @if(!empty($schoolInfoForLayout->social_media['instagram']))
-                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['instagram'] }}" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
+                                        <a href="{{ $schoolInfoForLayout->social_media['instagram'] }}" target="_blank"><i class="fab fa-instagram"></i></a>
                                     @endif
                                     @if(!empty($schoolInfoForLayout->social_media['whatsapp']))
-                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['whatsapp'] }}" target="_blank"><i class="fab fa-whatsapp fa-lg"></i></a>
+                                        <a href="{{ $schoolInfoForLayout->social_media['whatsapp'] }}" target="_blank"><i class="fab fa-whatsapp"></i></a>
                                     @endif
                                     @if(!empty($schoolInfoForLayout->social_media['youtube']))
-                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['youtube'] }}" target="_blank"><i class="fab fa-youtube fa-lg"></i></a>
+                                        <a href="{{ $schoolInfoForLayout->social_media['youtube'] }}" target="_blank"><i class="fab fa-youtube"></i></a>
                                     @endif
                                 @endif
                             </div>

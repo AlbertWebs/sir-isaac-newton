@@ -19,6 +19,7 @@ use App\Models\ContactInformation;
 use App\Models\SchoolClass;
 use App\Models\Teacher;
 use App\Models\Student;
+use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -370,53 +371,21 @@ class WebsiteController extends Controller
      */
     public function clubs()
     {
-        $earlyClub = AboutPageContent::where('section_type', 'clubs')
-            ->where('name', 'Early Club')
-            ->where('is_visible', true)
-            ->first();
-
-        $lunchClub = AboutPageContent::where('section_type', 'clubs')
-            ->where('name', 'Lunch Club')
-            ->where('is_visible', true)
-            ->first();
-
-        $afternoonClub = AboutPageContent::where('section_type', 'clubs')
-            ->where('name', 'Afternoon Club')
-            ->where('is_visible', true)
-            ->first();
-
-        $musicClub = AboutPageContent::where('section_type', 'clubs')
-            ->where('name', 'Music Club')
-            ->where('is_visible', true)
-            ->first();
+        $clubs = \App\Models\Club::where('status', 'active')
+            ->orderBy('name')
+            ->get()
+            ->map(function ($club) {
+                return [
+                    'id' => $club->id,
+                    'name' => $club->name,
+                    'code' => $club->code,
+                    'description' => $club->description,
+                    'image' => $club->image ? asset('storage/' . $club->image) : null,
+                ];
+            });
 
         return response()->json([
-            'clubs' => [
-                'early_club' => $earlyClub ? [
-                    'id' => $earlyClub->id,
-                    'name' => $earlyClub->name,
-                    'image' => $earlyClub->image ? asset('storage/' . $earlyClub->image) : null,
-                    'description' => $earlyClub->description,
-                ] : null,
-                'lunch_club' => $lunchClub ? [
-                    'id' => $lunchClub->id,
-                    'name' => $lunchClub->name,
-                    'image' => $lunchClub->image ? asset('storage/' . $lunchClub->image) : null,
-                    'description' => $lunchClub->description,
-                ] : null,
-                'afternoon_club' => $afternoonClub ? [
-                    'id' => $afternoonClub->id,
-                    'name' => $afternoonClub->name,
-                    'image' => $afternoonClub->image ? asset('storage/' . $afternoonClub->image) : null,
-                    'description' => $afternoonClub->description,
-                ] : null,
-                'music_club' => $musicClub ? [
-                    'id' => $musicClub->id,
-                    'name' => $musicClub->name,
-                    'image' => $musicClub->image ? asset('storage/' . $musicClub->image) : null,
-                    'description' => $musicClub->description,
-                ] : null,
-            ],
+            'clubs' => $clubs,
         ]);
     }
 }

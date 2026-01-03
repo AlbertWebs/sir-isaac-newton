@@ -71,6 +71,9 @@ class ClassController extends Controller
             'description' => ['nullable', 'string'],
         ]);
 
+        // Convert level to lowercase to match database constraint
+        $validated['level'] = strtolower($validated['level']);
+
         // Set current_enrollment to 0 initially (will be calculated dynamically)
         $validated['current_enrollment'] = 0;
 

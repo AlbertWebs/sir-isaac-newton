@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             SessionTimeSeeder::class,
             BreadcrumbSeeder::class,
             SchoolClassSeeder::class,
+            ClubSeeder::class,
             GalleryImageSeeder::class,
             ContactInformationSeeder::class,
         ]);

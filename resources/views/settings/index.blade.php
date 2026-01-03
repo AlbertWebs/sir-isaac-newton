@@ -38,22 +38,22 @@ use App\Models\Setting;
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="school_name" class="block text-sm font-medium text-gray-700 mb-2">School Name *</label>
+                            <label for="school_name" class="block text-sm font-medium text-gray-700 mb-2">School Name *</label>
                         <input 
                             type="text" 
                             id="school_name" 
                             name="settings[school_name]" 
-                            value="{{ Setting::get('school_name', 'Global College') }}"
+                            value="{{ $schoolInfo->name ?? '' }}"
                             required
                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
                     </div>
 
                     <div>
-                        <label for="school_logo" class="block text-sm font-medium text-gray-700 mb-2">Normal Logo</label>
+                            <label for="school_logo" class="block text-sm font-medium text-gray-700 mb-2">Normal Logo</label>
                         <div class="flex items-center space-x-4">
-                            @if(Setting::get('school_logo'))
-                            <img src="{{ asset('storage/' . Setting::get('school_logo')) }}" alt="School Logo" class="h-16 w-16 object-contain border border-gray-300 rounded">
+                            @if($schoolInfo->logo)
+                            <img src="{{ asset('storage/' . $schoolInfo->logo) }}" alt="School Logo" class="h-16 w-16 object-contain border border-gray-300 rounded">
                             @else
                             <div class="h-16 w-16 bg-gray-100 border border-gray-300 rounded flex items-center justify-center">
                                 <span class="text-gray-400 text-xs">No Logo</span>
@@ -73,10 +73,10 @@ use App\Models\Setting;
                     </div>
 
                     <div>
-                        <label for="receipt_logo" class="block text-sm font-medium text-gray-700 mb-2">Receipt Logo</label>
+                            <label for="receipt_logo" class="block text-sm font-medium text-gray-700 mb-2">Receipt Logo</label>
                         <div class="flex items-center space-x-4">
-                            @if(Setting::get('receipt_logo'))
-                            <img src="{{ asset('storage/' . Setting::get('receipt_logo')) }}" alt="Receipt Logo" class="h-16 w-16 object-contain border border-gray-300 rounded">
+                            @if($schoolInfo->receipt_logo)
+                            <img src="{{ asset('storage/' . $schoolInfo->receipt_logo) }}" alt="Receipt Logo" class="h-16 w-16 object-contain border border-gray-300 rounded">
                             @else
                             <div class="h-16 w-16 bg-gray-100 border border-gray-300 rounded flex items-center justify-center">
                                 <span class="text-gray-400 text-xs">No Logo</span>
@@ -108,24 +108,24 @@ use App\Models\Setting;
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="school_email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <label for="school_email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
                         <input 
                             type="email" 
                             id="school_email" 
                             name="settings[school_email]" 
-                            value="{{ Setting::get('school_email', 'info@globalcollege.edu') }}"
+                            value="{{ $schoolInfo->email ?? '' }}"
                             required
                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
                     </div>
 
                     <div>
-                        <label for="school_phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                            <label for="school_phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
                         <input 
                             type="text" 
                             id="school_phone" 
                             name="settings[school_phone]" 
-                            value="{{ Setting::get('school_phone', '+254 700 000 000') }}"
+                            value="{{ $schoolInfo->phone ?? '' }}"
                             required
                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
@@ -137,7 +137,7 @@ use App\Models\Setting;
                             type="text" 
                             id="school_address" 
                             name="settings[school_address]" 
-                            value="{{ Setting::get('school_address', 'P.O. Box 12345, Nairobi, Kenya') }}"
+                            value="{{ $schoolInfo->address ?? '' }}"
                             required
                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
@@ -149,7 +149,7 @@ use App\Models\Setting;
                             type="url" 
                             id="school_website" 
                             name="settings[school_website]" 
-                            value="{{ Setting::get('school_website') }}"
+                            value="{{ $schoolInfo->website ?? '' }}"
                             placeholder="https://www.example.com"
                             class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         >
