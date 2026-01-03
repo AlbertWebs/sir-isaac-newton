@@ -32,47 +32,25 @@
         </div>
         <div class="row gx-50 gy-gx">
             @forelse($classes ?? [] as $class)
+          
             <div class="col-md-6 col-lg-4">
                 <div class="class-card bg-gradient-to-br from-white via-blue-50 to-purple-50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:scale-105 hover:rotate-1 border-4 border-transparent hover:border-yellow-300 min-h-[650px] flex flex-col">
                     <div class="p-8 flex-grow flex flex-col">
-                        <div class="class-image mb-6 relative">
-                            <img src="{{ $class['image'] ?? 'https://via.placeholder.com/400x300?text=Class+Image' }}" alt="{{ $class['name'] }}" class="w-full h-56 object-cover rounded-xl shadow-md">
+                        <div class="class-image mb-6 relative"> 
+                            <!-- <img src="{{ $class['image'] }}" alt="{{ $class['name'] }}" class="w-full h-56 object-cover rounded-xl shadow-md"> -->
                             <div class="absolute top-2 right-2 bg-yellow-400 text-black px-2 py-1 rounded-full text-xs font-bold animate-bounce">⭐</div>
                         </div>
                         <h3 class="text-3xl font-bold text-gray-800 mb-3 text-center">{{ $class['name'] }} 🎉</h3>
-                        <p class="text-base text-gray-600 mb-6 text-center italic" style="min-height:120px;">{{ $class['description'] ?? 'A fun and exciting learning adventure awaits!' }}</p>
+                        <p style="padding:2px;" class="text-base text-gray-600 mb-6 text-center italic" style="min-height:120px;">{{ $class['description'] ?? 'A fun and exciting learning adventure awaits!' }}</p>
 
-                        <!-- <div class="grid grid-cols-2 gap-2 text-sm mb-6">
-                            <div class="flex items-center text-gray-700 bg-blue-100 p-3 rounded-lg">
-                                <i class="fas fa-users mr-2 text-blue-500"></i>
-                                <span>Level: {{ ucfirst($class['level']) }} 🌟</span>
-                            </div>
-                            <div class="flex items-center text-gray-700 bg-green-100 p-3 rounded-lg">
-                                <i class="fas fa-birthday-cake mr-2 text-green-500"></i>
-                                <span>Age: {{ $class['age_range'] }} 🎂</span>
-                            </div>
-                            <div class="flex items-center text-gray-700 bg-purple-100 p-3 rounded-lg">
-                                <i class="fas fa-tag mr-2 text-purple-500"></i>
-                                <span>Code: {{ $class['code'] }} 🏷️</span>
-                            </div>
-                            <div class="flex items-center text-gray-700 bg-orange-100 p-3 rounded-lg">
-                                <i class="fas fa-calendar mr-2 text-orange-500"></i>
-                                <span>Year: {{ $class['academic_year'] }} 📅</span>
-                            </div>
-                        </div>
+                       
 
-                        <div class="flex items-center justify-between mb-6 bg-yellow-100 p-4 rounded-xl">
-                            <p class="text-xl font-bold text-blue-600">
-                                @if($class['price'] ?? null)
-                                    💰 KES {{ number_format($class['price'], 2) }} <span class="text-sm font-normal text-gray-500">/ term</span>
-                                @else
-                                    Price: N/A 😊
-                                @endif
-                            </p>
-                            <span class="text-sm font-semibold text-gray-600 bg-white px-3 py-1 rounded-full shadow">
+                        <div class="flex items-center justify-between mb-6 bg-yellow-100 p-4 rounded-xl text-center">
+                           
+                            <span class="text-sm font-semibold text-gray-600 bg-white px-3 py-1 rounded-full shadow text-center">
                                 Available: {{ ($class['capacity'] ?? 0) - ($class['current_enrollment'] ?? 0) }} Seats 🪑
                             </span>
-                        </div> -->
+                        </div>
 
                         <div class="text-center mt-auto p-3">
                             <a href="{{ route('website.enroll') }}" class="vs-btn" style="background-color: #4F46E5;">

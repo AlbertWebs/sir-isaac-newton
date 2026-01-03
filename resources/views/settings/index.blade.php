@@ -196,6 +196,125 @@ use App\Models\Setting;
                 </div>
             </div>
 
+            <!-- SEO Settings -->
+            <div class="mb-8 border-b border-gray-200 pb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    SEO Settings (Search Engine Optimization)
+                </h3>
+                
+                <div class="grid grid-cols-1 gap-6">
+                    <div>
+                        <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-2">Meta Title</label>
+                        <input 
+                            type="text" 
+                            id="meta_title" 
+                            name="settings[meta_title]" 
+                            value="{{ $schoolInfo->meta_title ?? '' }}"
+                            placeholder="e.g., Best School in Kisumu | Sir Isaac Newton"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                        <p class="text-xs text-gray-500 mt-1">Short title (max 60 characters) for search engines and browser tabs.</p>
+                    </div>
+
+                    <div>
+                        <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-2">Meta Description</label>
+                        <textarea 
+                            id="meta_description" 
+                            name="settings[meta_description]" 
+                            rows="3"
+                            placeholder="e.g., Sir Isaac Newton School offers quality CBC education in Kisumu. Enroll your child today for holistic development."
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >{{ $schoolInfo->meta_description ?? '' }}</textarea>
+                        <p class="text-xs text-gray-500 mt-1">Brief summary (max 160 characters) for search engine results.</p>
+                    </div>
+
+                    <div>
+                        <label for="meta_keywords" class="block text-sm font-medium text-gray-700 mb-2">Meta Keywords</label>
+                        <input 
+                            type="text" 
+                            id="meta_keywords" 
+                            name="settings[meta_keywords]" 
+                            value="{{ $schoolInfo->meta_keywords ?? '' }}"
+                            placeholder="e.g., schools in Kisumu, best schools, CBC education, private schools Kenya"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                        <p class="text-xs text-gray-500 mt-1">Comma-separated relevant keywords for search engines.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Settings -->
+            <div class="mb-8 border-b border-gray-200 pb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.25 14.25h13.5m-13.5 0a3 3 0 000 6h13.5a3 3 0 000-6m-13.5 0a3 3 0 010-6h13.5a3 3 0 010 6m-13.5 0h3.75a3 3 0 013 3v1.5a3 3 0 01-3 3h-3.75a3 3 0 01-3-3V17.25a3 3 0 013-3z"></path>
+                    </svg>
+                    Social Media Settings
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="social_facebook" class="block text-sm font-medium text-gray-700 mb-2">Facebook URL</label>
+                        <input 
+                            type="url" 
+                            id="social_facebook" 
+                            name="settings[social_media][facebook]" 
+                            value="{{ $schoolInfo->social_media['facebook'] ?? '' }}"
+                            placeholder="https://facebook.com/yourschool"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                    </div>
+                    <div>
+                        <label for="social_twitter" class="block text-sm font-medium text-gray-700 mb-2">Twitter URL</label>
+                        <input 
+                            type="url" 
+                            id="social_twitter" 
+                            name="settings[social_media][twitter]" 
+                            value="{{ $schoolInfo->social_media['twitter'] ?? '' }}"
+                            placeholder="https://twitter.com/yourschool"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                    </div>
+                    <div>
+                        <label for="social_linkedin" class="block text-sm font-medium text-gray-700 mb-2">LinkedIn URL</label>
+                        <input 
+                            type="url" 
+                            id="social_linkedin" 
+                            name="settings[social_media][linkedin]" 
+                            value="{{ $schoolInfo->social_media['linkedin'] ?? '' }}"
+                            placeholder="https://linkedin.com/company/yourschool"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                    </div>
+                    <div>
+                        <label for="social_instagram" class="block text-sm font-medium text-gray-700 mb-2">Instagram URL</label>
+                        <input 
+                            type="url" 
+                            id="social_instagram" 
+                            name="settings[social_media][instagram]" 
+                            value="{{ $schoolInfo->social_media['instagram'] ?? '' }}"
+                            placeholder="https://instagram.com/yourschool"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="social_whatsapp" class="block text-sm font-medium text-gray-700 mb-2">WhatsApp Link</label>
+                        <input 
+                            type="url" 
+                            id="social_whatsapp" 
+                            name="settings[social_media][whatsapp]" 
+                            value="{{ $schoolInfo->social_media['whatsapp'] ?? '' }}"
+                            placeholder="https://wa.me/2547XXXXXXXX"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                        <p class="text-xs text-gray-500 mt-1">Enter full WhatsApp link, e.g., https://wa.me/254712345678</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Submit Button -->
             <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
                 <a href="{{ route('admin.dashboard') }}" class="px-6 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-semibold">

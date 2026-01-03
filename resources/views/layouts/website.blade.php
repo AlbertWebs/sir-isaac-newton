@@ -5,23 +5,97 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <title>@yield('title', 'Sir Isaac Newton School') - {{ config('app.name', 'School Management') }}</title>
-    
-    @section('meta')
-    <meta name="description" content="@yield('description', 'Sir Isaac Newton School - Creating World Changers')">
-    <meta name="keywords" content="@yield('keywords', 'school, education, kindergarten, primary, Sir Isaac Newton')">
+    @php
+        $defaultTitle = $schoolInfoForLayout->meta_title ?? ('Sir Isaac Newton School - ' . config('app.name') . ' | Best Schools in Kisumu');
+        $defaultDescription = $schoolInfoForLayout->meta_description ?? 'Sir Isaac Newton School - Creating World Changers. Discover the best education in Kisumu. Quality learning from kindergarten to primary.';
+        $defaultKeywords = $schoolInfoForLayout->meta_keywords ?? 'school, education, kindergarten, primary, Sir Isaac Newton, Kisumu, best schools in Kisumu, CBC curriculum, quality education';
+        $defaultOgImage = (isset($schoolInfoForLayout->logo) && $schoolInfoForLayout->logo) ? asset('storage/' . $schoolInfoForLayout->logo) : asset('selected/assets/img/logo.svg');
+        
+        // Prepare Social Links for Schema
+        $socialLinks = [];
+        if (isset($schoolInfoForLayout->social_media) && is_array($schoolInfoForLayout->social_media)) {
+            foreach(['facebook', 'twitter', 'linkedin', 'youtube'] as $platform) {
+                if (!empty($schoolInfoForLayout->social_media[$platform])) {
+                    $socialLinks[] = $schoolInfoForLayout->social_media[$platform];
+                }
+            }
+        }
+        $socialLinks[] = url('/');
+    @endphp
+
+    <title>{{$defaultTitle}}</title>
+
+    <meta name="description" content="@yield('description', $defaultDescription)">
+    <meta name="keywords" content="@yield('keywords', $defaultKeywords)">
     <meta name="robots" content="INDEX,FOLLOW">
-    @show
-    
-    <!-- Open Graph / Facebook -->
+
+    {{-- Open Graph / Facebook --}}
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'Sir Isaac Newton School')">
-    <meta property="og:description" content="@yield('description', 'Sir Isaac Newton School - Creating World Changers')">
+    <meta property="og:title" content="@yield('og_title', $defaultTitle)">
+    <meta property="og:description" content="@yield('og_description', $defaultDescription)">
+    <meta property="og:image" content="@yield('og_image', $defaultOgImage)">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    {{-- Twitter --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="@yield('twitter_title', $defaultTitle)">
+    <meta name="twitter:description" content="@yield('twitter_description', $defaultDescription)">
+    <meta name="twitter:image" content="@yield('twitter_image', $defaultOgImage)">
+
+    {{-- Schema.org Markup --}}
+    @verbatim
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "{{ url('/') }}#organization",
+          "name": "{{ $schoolInfoForLayout->name ?? 'Sir Isaac Newton School' }}",
+          "url": "{{ url('/') }}",
+          "logo": "{{ $defaultOgImage }}",
+          "description": "{{ $defaultDescription }}",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "{{ $schoolInfoForLayout->address ?? '123 School Lane' }}",
+            "addressLocality": "Kisumu",
+            "addressRegion": "Kisumu County",
+            "postalCode": "40100",
+            "addressCountry": "KE"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "{{ $schoolInfoForLayout->phone ?? '+2547XXXXXXXX' }}",
+            "contactType": "Customer Service",
+            "email": "{{ $schoolInfoForLayout->email ?? 'info@sirisaacnewton.ac.ke' }}"
+          },
+          "sameAs": {!! json_encode($socialLinks) !!}
+        },
+        {
+          "@type": "WebSite",
+          "@id": "{{ url('/') }}#website",
+          "url": "{{ url('/') }}",
+          "name": "{{ $schoolInfoForLayout->name ?? 'Sir Isaac Newton School' }}",
+          "publisher": {
+            "@id": "{{ url('/') }}#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ url('/search') }}?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+    @endverbatim
     
     <!-- Favicons -->
-    <link rel="shortcut icon" href="{{ asset('selected/assets/img/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('selected/assets/img/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ $defaultOgImage }}" type="image/x-icon">
+    <link rel="icon" href="{{ $defaultOgImage }}" type="image/x-icon">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -35,10 +109,208 @@
     <link rel="stylesheet" href="{{ asset('selected/assets/css/magnific-popup.min.css') }}">
     <link rel="stylesheet" href="{{ asset('selected/assets/css/slick.min.css') }}">
     <link rel="stylesheet" href="{{ asset('selected/assets/css/style.css') }}">
+    <style>
+        .image-logo {
+            max-width: 150px !important;
+            max-height: 150px !important;
+        }
+        @media screen and (max-width: 768px) {
+            .image-logo {
+                max-width: 80px !important;
+                max-height: 80px !important;
+            }
+            .ls-hide-phone{
+                display: none !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .vs-menu-area {
+                padding: 15px; /* Reduce overall padding of the mobile menu header */
+            }
+            .vs-menu-area .mobile-logo img {
+                max-width: 80px !important; /* Reduce logo size in mobile menu */
+                max-height: 80px !important;
+            }
+            .top-menu-contact-info {
+                font-size: 0.85em; /* Keep previous font size, or adjust if needed */
+                margin-right: 15px; /* Add space between items */
+                white-space: nowrap;
+            }
+            .top-menu-contact-info a {
+                display: none; /* Hide text, only show icon */
+            }
+            .top-menu-contact-info i {
+                margin-right: 0; /* Remove margin from icon if text is hidden */
+                font-size: 1.2em; /* Increase icon size for better visibility */
+            }
+            .top-menu-contact-info:last-child {
+                margin-right: 0; /* No margin on the last item */
+            }
+            .header-social.mt-2 {
+                margin-top: 5px !important; /* Reduce top margin */
+                gap: 8px !important; /* Adjust gap between icons */
+            }
+            .header-social.mt-2 a {
+                font-size: 1em !important; /* Adjust icon size */
+                padding: 3px !important; /* Adjust padding around icons */
+            }
+            
+            /* Why Choose Us / Our Features section mobile optimization */
+            .service-style1 .service-body {
+                position: relative; /* Enable absolute positioning for children */
+                overflow: hidden; /* Hide overflowing content */
+                height: 280px; /* Fixed height for cards */
+                min-height: 280px; /* Ensure minimum height */
+            }
+            .service-style1 .service-img {
+                height: 100%; /* Ensure image container fills the body */
+            }
+            .service-style1 .service-img img {
+                object-fit: cover; /* Prevent image stretching */
+                height: 100%; /* Ensure image fills container */
+                width: 100%; /* Ensure image fills container */
+            }
+            .service-style1 .service-content {
+                position: absolute; /* Position content at the bottom */
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+                padding: 10px;
+                color: #ffffff; /* White text for readability */
+                text-align: center; /* Center text */
+            }
+            .service-style1 .service-title {
+                font-size: 1.1em; /* Reduced font size for title */
+                margin-bottom: 5px; /* Add some space below title */
+            }
+            .service-style1 .service-title a {
+                color: #ffffff !important; /* Ensure title text is white */
+            }
+            .service-style1 .service-icon {
+                display: none; /* Hide icons on mobile */
+            }
+            .d-none-mobile{
+                display: none !important;
+            }
+        }
+        @media (min-width: 992px) {
+            .main-menu ul li a {
+                padding: 15px 15px; /* Adjust padding as needed to reduce height */
+            }
+        }
+        @media (max-width: 575px) {
+                .header-layout1 .header-top {
+                    padding: 0px 0px;
+                }
+            }
+
+        /* Mobile Bottom Nav Styles */
+        .vs-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff; /* White background */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow at the top */
+            z-index: 1000;
+            display: none; /* Hidden by default, shown only on mobile */
+            padding: 5px 0; /* Reduced padding */
+        }
+
+        @media (max-width: 991px) {
+            .vs-bottom-nav {
+                display: block; /* Show on mobile devices */
+            }
+        }
+
+        .vs-bottom-nav-inner {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+        }
+
+        .vs-bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333333; /* Dark text for links */
+            font-size: 0.7em; /* Reduced font size */
+            padding: 3px; /* Reduced padding */
+            transition: color 0.3s ease;
+            flex-grow: 1; /* Distribute space evenly */
+            border-top: 2px solid #f0f0f0; /* Subtle top border */
+            border-right: 1px solid #f0f0f0; /* Separator between links */
+        }
+
+        .vs-bottom-nav-item:last-child {
+            border-right: none; /* No right border on the last item */
+        }
+
+        .vs-bottom-nav-item i {
+            font-size: 1.2em; /* Reduced icon size */
+            margin-bottom: 3px; /* Reduced margin */
+        }
+
+        .vs-bottom-nav-item.active,
+        .vs-bottom-nav-item:hover {
+            color: #cd9933; /* Active/hover color, match theme */
+        }
+
+        .vs-bottom-nav-item-center {
+            transform: translateY(-15px); /* Slightly less lift */
+            background-color: #cd9933; /* Highlight color for center button */
+            color: #ffffff !important; /* White text for center button */
+            border-radius: 50%; /* Circular shape */
+            padding: 10px; /* Reduced padding */
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+        }
+        .vs-bottom-nav-item-center i,
+        .vs-bottom-nav-item-center span {
+            color: #ffffff !important; /* Ensure icon and text are white */
+        }
+        .vs-bottom-nav-item-center:hover {
+            background-color: #e65c00; /* Darker hover for center button */
+        }
+
+        /* Desktop Social Media Icons Styling */
+        @media (min-width: 992px) {
+            .header-social {
+                display: flex; /* Use flexbox for alignment */
+                align-items: center;
+                gap: 10px; /* Space between icons */
+            }
+
+            .header-social.style-white a {
+                font-size: 0.9em; /* Adjusted icon size for better fit */
+                color: #ffffff !important; /* Force white color */
+                font-weight: 700; /* Make icons bolder */
+                transition: all 0.3s ease; /* Smooth transition for all properties */
+                display: flex; /* Use flexbox for centering */
+                justify-content: center;
+                align-items: center;
+                width: 35px; /* Slightly increase size */
+                height: 35px; /* Slightly increase size */
+                border-radius: 50%; /* Make them circular */
+                background-color: transparent !important; /* Transparent background initially */
+                border: 1px solid #cd9933 !important; /* Theme color border */
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Subtle initial shadow */
+            }
+
+            .header-social.style-white a:hover {
+                color: #ffffff !important; /* White icon on hover */
+                background-color: #cd9933 !important; /* Solid theme color background on hover */
+                transform: translateY(-2px); /* Slight lift effect on hover */
+                border-color: #cd9933 !important; /* Keep theme color border on hover */
+                box-shadow: 0 0 15px rgba(205, 153, 51, 0.8); /* More prominent shadow on hover */
+            }
+        }
+    </style>
     
     @stack('styles')
 </head>
-
 <body>
     <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
@@ -57,7 +329,13 @@
         <div class="vs-menu-area text-center">
             <button class="vs-menu-toggle"><i class="fal fa-times"></i></button>
             <div class="mobile-logo">
-                <a href="{{ route('website.homepage') }}"><img src="{{ asset('selected/assets/img/logo.svg') }}" alt="Sir Isaac Newton School"></a>
+                <a href="{{ route('website.homepage') }}">
+                    @if(isset($schoolInfoForLayout->logo) && $schoolInfoForLayout->logo)
+                        <img style="max-width: 100px !important; max-height: 100px !important;" src="{{ asset('storage/' . $schoolInfoForLayout->logo) }}" alt="Sir Isaac Newton School Mobile Logo">
+                    @else
+                        <img src="{{ asset('selected/assets/img/logo.svg') }}" alt="Sir Isaac Newton School Mobile Logo">
+                    @endif
+                </a>
             </div>
             <div class="vs-mobile-menu">
                 <ul>
@@ -79,7 +357,15 @@
             <button class="closeButton sideMenuCls"><i class="far fa-times"></i></button>
             <div class="widget">
                 <div class="widget-about">
-                    <div class="footer-logo"><img src="{{ asset('selected/assets/img/logo.svg') }}" alt="Sir Isaac Newton School"></div>
+                    <div class="footer-logo">
+                        <a href="{{ route('website.homepage') }}">
+                            @if(isset($schoolInfoForLayout->logo) && $schoolInfoForLayout->logo)
+                                <img style="max-width: 150px !important; max-height: 150px !important;" src="{{ asset('storage/' . $schoolInfoForLayout->logo) }}" alt="Sir Isaac Newton School Logo">
+                            @else
+                                <img src="{{ asset('selected/assets/img/logo.svg') }}" alt="Sir Isaac Newton School Logo">
+                            @endif
+                        </a>
+                    </div>
                     <p class="mb-0">We are constantly expanding the range of services offered, taking care of children of all ages.</p>
                 </div>
             </div>
@@ -133,24 +419,67 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-auto text-center">
+                    <div class="col-auto d-none d-lg-block">
+                        <div class="header-social style-white">
+                            @if(isset($schoolInfoForLayout->social_media) && is_array($schoolInfoForLayout->social_media))
+                                @if(!empty($schoolInfoForLayout->social_media['facebook']))
+                                    <a href="{{ $schoolInfoForLayout->social_media['facebook'] }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                @endif
+                                @if(!empty($schoolInfoForLayout->social_media['twitter']))
+                                    <a href="{{ $schoolInfoForLayout->social_media['twitter'] }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                                @endif
+                                @if(!empty($schoolInfoForLayout->social_media['linkedin']))
+                                    <a href="{{ $schoolInfoForLayout->social_media['linkedin'] }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                @endif
+                                @if(!empty($schoolInfoForLayout->social_media['instagram']))
+                                    <a href="{{ $schoolInfoForLayout->social_media['instagram'] }}" target="_blank"><i class="fab fa-instagram"></i></a>
+                                @endif
+                                @if(!empty($schoolInfoForLayout->social_media['whatsapp']))
+                                    <a href="{{ $schoolInfoForLayout->social_media['whatsapp'] }}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-lg-auto text-center d-none">
                         <div class="header-links style2 style-white">
-                            <ul>
+                            <ul class="d-flex flex-wrap justify-content-center justify-content-lg-end">
                                 @if($contactInfo || $schoolInfo)
-                                    <li>
+                                    <li class="top-menu-contact-info">
                                         <i class="fas fa-envelope"></i>Email: 
                                         <a href="mailto:{{ $contactInfo->email ?? $schoolInfo->email ?? 'info@sirisaacnewton.ac.ke' }}">
                                             {{ $contactInfo->email ?? $schoolInfo->email ?? 'info@sirisaacnewton.ac.ke' }}
                                         </a>
                                     </li>
-                                    <li>
-                                        <i class="fas fa-mobile-alt"></i>Phone: 
-                                        <a href="tel:{{ $contactInfo->phone ?? $schoolInfo->phone ?? '' }}">
-                                            {{ $contactInfo->phone ?? $schoolInfo->phone ?? '' }}
-                                        </a>
+                                    <li class="top-menu-contact-info">
+                                        <i class="fas fa-mobile-alt"></i><a href="tel:{{ $contactInfo->phone ?? $schoolInfo->phone ?? '' }}">{{ $contactInfo->phone ?? $schoolInfo->phone ?? '' }}</a>
                                     </li>
                                 @endif
                             </ul>
+                        </div>
+                    </div>
+                  
+                    <div class="col-lg-auto text-center d-lg-none d-block">
+                                
+                                @if(isset($schoolInfoForLayout->social_media) && is_array($schoolInfoForLayout->social_media))
+                                    @if(!empty($schoolInfoForLayout->social_media['facebook']))
+                                    @endif
+                                    @if(!empty($schoolInfoForLayout->social_media['twitter']))
+                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['twitter'] }}" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
+                                    @endif
+                                    @if(!empty($schoolInfoForLayout->social_media['linkedin']))
+                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['linkedin'] }}" target="_blank"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                                    @endif
+                                    @if(!empty($schoolInfoForLayout->social_media['instagram']))
+                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['instagram'] }}" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
+                                    @endif
+                                    @if(!empty($schoolInfoForLayout->social_media['whatsapp']))
+                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['whatsapp'] }}" target="_blank"><i class="fab fa-whatsapp fa-lg"></i></a>
+                                    @endif
+                                    @if(!empty($schoolInfoForLayout->social_media['youtube']))
+                                        <a style="background-color: #transparent; width:20px; height:20px; padding:1px;" href="{{ $schoolInfoForLayout->social_media['youtube'] }}" target="_blank"><i class="fab fa-youtube fa-lg"></i></a>
+                                    @endif
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,7 +492,11 @@
                         <div class="col-8 col-sm-auto">
                             <div class="header-logo">
                                 <a href="{{ route('website.homepage') }}">
-                                    <img src="{{ asset('selected/assets/img/logo.svg') }}" alt="Sir Isaac Newton School">
+                                    @if(isset($schoolInfoForLayout->logo) && $schoolInfoForLayout->logo)
+                                        <img class="image-logo" src="{{ asset('storage/' . $schoolInfoForLayout->logo) }}" alt="Sir Isaac Newton School Logo">
+                                    @else
+                                        <img class="image-logo" src="{{ asset('selected/assets/img/logo.svg') }}" alt="Sir Isaac Newton School Logo">
+                                    @endif
                                 </a>
                             </div>
                         </div>
@@ -204,7 +537,11 @@
                 <div class="row gx-60 gy-4 text-center text-lg-start justify-content-between align-items-center">
                     <div class="col-lg">
                         <a href="{{ route('website.homepage') }}">
-                            <img src="{{ asset('selected/assets/img/logo-2.svg') }}" alt="Sir Isaac Newton School">
+                            @if(isset($schoolInfoForLayout->logo) && $schoolInfoForLayout->logo)
+                                <img style="max-height: 100px;" src="{{ asset('storage/' . $schoolInfoForLayout->logo) }}" alt="Sir Isaac Newton School Logo">
+                            @else
+                                <img src="{{ asset('selected/assets/img/logo-2.svg') }}" alt="Sir Isaac Newton School">
+                            @endif
                         </a>
                     </div>
                     <div class="col-lg-auto">
@@ -298,6 +635,38 @@
         </div>
     </footer>
 
+    <!-- Mobile Bottom Nav -->
+    <div class="vs-bottom-nav d-block d-lg-none">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="vs-bottom-nav-inner">
+                        <a href="{{ route('website.homepage') }}" class="vs-bottom-nav-item {{ request()->routeIs('website.homepage') ? 'active' : '' }}">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                        <a href="{{ route('website.classes') }}" class="vs-bottom-nav-item {{ request()->routeIs('website.classes') ? 'active' : '' }}">
+                            <i class="fas fa-book-open"></i>
+                            <span>Classes</span>
+                        </a>
+                        <a href="{{ route('website.enroll') }}" class="vs-bottom-nav-item vs-bottom-nav-item-center {{ request()->routeIs('website.enroll') ? 'active' : '' }}">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Enroll</span>
+                        </a>
+                        <a href="{{ route('website.gallery') }}" class="vs-bottom-nav-item {{ request()->routeIs('website.gallery') ? 'active' : '' }}">
+                            <i class="fas fa-images"></i>
+                            <span>Gallery</span>
+                        </a>
+                        <a href="{{ route('website.contact') }}" class="vs-bottom-nav-item {{ request()->routeIs('website.contact') ? 'active' : '' }}">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>Contact</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scroll To Top -->
     <a href="#" class="scrollToTop scroll-btn"><i class="far fa-arrow-up"></i></a>
 
@@ -317,4 +686,3 @@
     @stack('scripts')
 </body>
 </html>
-

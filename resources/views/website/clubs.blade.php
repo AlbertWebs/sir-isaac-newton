@@ -39,7 +39,7 @@
                 @if(isset($clubs['early_club']) && $clubs['early_club'])
                     <div class="feature-style3">
                         <div class="feature-img">
-                            <div class="img"><img src="{{ $clubs['early_club']['image'] ? asset('storage/' . $clubs['early_club']['image']) : asset('selected/assets/img/feature/fe-1-1.jpg') }}" alt="{{ $clubs['early_club']['name'] }}"></div>
+                            <div class="img"><img src="{{ $clubs['early_club']['image'] ?? asset('selected/assets/img/feature/fe-1-1.jpg') }}" alt="{{ $clubs['early_club']['name'] }}"></div>
                         </div>
                         <div class="feature-body">
                             <h3 class="feature-title h4">{{ $clubs['early_club']['name'] }}</h3>
@@ -54,7 +54,7 @@
                 @if(isset($clubs['lunch_club']) && $clubs['lunch_club'])
                     <div class="feature-style3">
                         <div class="feature-img">
-                            <div class="img"><img src="{{ $clubs['lunch_club']['image'] ? asset('storage/' . $clubs['lunch_club']['image']) : asset('selected/assets/img/feature/fe-1-2.jpg') }}" alt="{{ $clubs['lunch_club']['name'] }}"></div>
+                            <div class="img"><img src="{{ $clubs['lunch_club']['image'] ?? asset('selected/assets/img/feature/fe-1-2.jpg') }}" alt="{{ $clubs['lunch_club']['name'] }}"></div>
                         </div>
                         <div class="feature-body">
                             <h3 class="feature-title h4">{{ $clubs['lunch_club']['name'] }}</h3>
@@ -74,7 +74,7 @@
                 @if(isset($clubs['afternoon_club']) && $clubs['afternoon_club'])
                     <div class="feature-style3">
                         <div class="feature-img">
-                            <div class="img"><img src="{{ $clubs['afternoon_club']['image'] ? asset('storage/' . $clubs['afternoon_club']['image']) : asset('selected/assets/img/feature/fe-1-3.jpg') }}" alt="{{ $clubs['afternoon_club']['name'] }}"></div>
+                            <div class="img"><img src="{{ $clubs['afternoon_club']['image'] ?? asset('selected/assets/img/feature/fe-1-3.jpg') }}" alt="{{ $clubs['afternoon_club']['name'] }}"></div>
                         </div>
                         <div class="feature-body">
                             <h3 class="feature-title h4">{{ $clubs['afternoon_club']['name'] }}</h3>
@@ -89,7 +89,7 @@
                 @if(isset($clubs['music_club']) && $clubs['music_club'])
                     <div class="feature-style3">
                         <div class="feature-img">
-                            <div class="img"><img src="{{ $clubs['music_club']['image'] ? asset('storage/' . $clubs['music_club']['image']) : asset('selected/assets/img/feature/fe-1-4.jpg') }}" alt="{{ $clubs['music_club']['name'] }}"></div>
+                            <div class="img"><img src="{{ $clubs['music_club']['image'] ?? asset('selected/assets/img/feature/fe-1-4.jpg') }}" alt="{{ $clubs['music_club']['name'] }}"></div>
                         </div>
                         <div class="feature-body">
                             <h3 class="feature-title h4">{{ $clubs['music_club']['name'] }}</h3>

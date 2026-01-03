@@ -5,25 +5,25 @@
 
 @section('content')
 <section class="vs-hero-wrapper  ">
-    <div class="vs-hero-carousel" data-height="770" data-container="1900" data-slidertype="responsive"
+    <div class="vs-hero-carousel" data-height="900" data-container="1900" data-slidertype="responsive"
         data-navbuttons="true">
         @forelse($sliders ?? [] as $slider)
         <!-- Slide 1-->
         <div class="ls-slide" data-ls="duration:12000; transition2d:5; kenburnszoom:in; kenburnsscale:1.1;">
-            <img width="1920" height="770" style="object-fit: cover;" src="{{ $slider['image'] ?? asset('selected/assets/img/hero/hero-1-1.jpg') }}" class="ls-bg" alt="bg"
+            <img width="1920" height="900" style="object-fit: cover;" src="{{ $slider['image'] ?? asset('selected/assets/img/hero/hero-1-1.jpg') }}" class="ls-bg ls-hide-desktop ls-hide-tablet" alt="bg"
                 decoding="async">
             <ls-layer
                 style="font-size:36px; color:#000; stroke:#000; stroke-width:0px; text-align:left; font-style:normal; text-decoration:none; text-transform:none; font-weight:400; letter-spacing:0px; border-style:solid; background-position:0% 0%; background-repeat:no-repeat; background-clip:border-box; overflow:visible; width:255px; height:255px; border-width:60px 60px 60px 60px; border-color:#FFD600; border-radius:50% 50% 50% 50%; top:126px; left:740px; z-index:4; -webkit-background-clip:border-box;"
-                class="ls-l ls-hide-tablet ls-hide-phone ls-text-layer" data-ls="static:forever;">
+                class="ls-l ls-hide-tablet ls-hide-phone ls-text-layer " data-ls="static:forever;">
             </ls-layer>
             <div style="font-size:36px; stroke:#000; stroke-width:0px; text-align:left; font-style:normal; text-decoration:none; text-transform:none; font-weight:400; letter-spacing:0px; background-position:0% 0%; background-repeat:no-repeat; background-clip:border-box; overflow:visible; width:711px; height:410px; left:312px; top:213px; background-color:#002c53; border-radius:213px 206px 50px 213px; z-index:5; -webkit-background-clip:border-box;"
-                class="ls-l ls-hide-tablet ls-hide-phone ls-text-layer" data-ls="static:forever;"></div>
+                class="ls-l ls-hide-tablet ls-hide-phone ls-text-layer " data-ls="static:forever;"></div>
             <div style="font-size:36px; stroke:#000; stroke-width:0px; text-align:left; font-style:normal; text-decoration:none; text-transform:none; font-weight:400; letter-spacing:0px; background-position:0% 0%; background-repeat:no-repeat; background-clip:border-box; opacity:0.9; overflow:visible; width:1200px; height:600px; left:350px; top:76px; background-color:#002c53; border-radius:213px 206px 50px 213px; z-index:5; -webkit-background-clip:border-box;"
-                class="ls-l ls-hide-desktop ls-hide-phone ls-text-layer" data-ls="static:forever;"></div>
-            <div style="font-size:36px; stroke:#000; stroke-width:0px; text-align:left; font-style:normal; text-decoration:none; text-transform:none; font-weight:400; letter-spacing:0px; background-position:0% 0%; background-repeat:no-repeat; background-clip:border-box; opacity:0.9; overflow:visible; width:1300px; height:700px; left:50%; top:33px; background-color:#002c53; border-radius:213px 206px 50px 213px; z-index:5; -webkit-background-clip:border-box;"
-                class="ls-l ls-hide-desktop ls-hide-tablet ls-text-layer" data-ls="static:forever;"></div>
+                class="ls-l ls-hide-desktop ls-hide-phone ls-text-layer " data-ls="static:forever;"></div>
+            <!-- <div style="font-size:36px; stroke:#000; stroke-width:0px; text-align:left; font-style:normal; text-decoration:none; text-transform:none; font-weight:400; letter-spacing:0px; background-position:0% 0%; background-repeat:no-repeat; background-clip:border-box; opacity:0.9; overflow:visible; width:1300px; height:700px; left:50%; top:33px; background-color:#002c53; border-radius:213px 206px 50px 213px; z-index:5; -webkit-background-clip:border-box;"
+                class="ls-l ls-hide-desktop ls-hide-tablet ls-text-layer " data-ls="static:forever;"></div> -->
             <h1 style="font-size:60px; stroke:#000; stroke-width:0px; text-align:center; font-style:normal; text-decoration:none; text-transform:none; font-weight:600; letter-spacing:0px; background-position:0% 0%; background-repeat:no-repeat; background-clip:border-box; overflow:visible; font-family:'Fredoka', sans-serif; line-height:60px; color:#ffffff; top:284px; left:312px; width:711px; -webkit-background-clip:border-box;"
-                class="ls-l ls-hide-tablet ls-hide-phone ls-text-layer"
+                class="ls-l ls-hide-tablet ls-hide-phone ls-hide-phone ls-text-layer "
                 data-ls="offsetxin:-100; delayin:200; easingin:easeOutQuint; offsetxout:-100; easingout:easeOutQuint;">
                 {!! $slider['text'] ?? 'We Prepare Your Child For Life' !!}
             </h1>
@@ -36,7 +36,9 @@
             <div style="font-size:30px; color:#000; stroke:#000; stroke-width:0px; text-align:center; font-style:normal; text-decoration:none; text-transform:none; font-weight:400; letter-spacing:0px; background-position:0% 0%; background-repeat:no-repeat; background-clip:border-box; overflow:visible; left:100%; top:494px; font-family:'Fredoka', sans-serif; width:711px; margin-left:-877px; -webkit-background-clip:border-box;"
                 class="ls-l ls-hide-tablet ls-hide-phone ls-html-layer"
                 data-ls="offsetyin:100; delayin:700; easingin:easeOutQuint; offsetyout:100; easingout:easeOutQuint;">
-                <a href="{{ $slider['button_link'] ?? route('website.contact') }}" class="vs-btn">{{ $slider['button_text'] }}</a>
+                <a href="{{ $slider['button_link'] ?? route('website.contact') }}" class="vs-btn">
+                    {{ $slider['button_text'] }}
+                </a>
             </div>
 
         
@@ -107,7 +109,7 @@
             <h2 class="sec-title">{{ $features[0]['section_heading'] ?? 'Enrol Your Child In A Session Now!' }}</h2>
             <p class="sec-text">{{ $features[0]['section_title'] ?? 'Pre-school has an open door policy and also offer a free trial session to all children.' }}</p>
         </div>
-        <div class="row vs-carousel" data-slide-show="4" data-ml-slide-show="3" data-lg-slide-show="3" data-md-slide-show="2">
+        <div class="row vs-carousel" data-slide-show="4" data-ml-slide-show="3" data-lg-slide-show="3" data-md-slide-show="2" data-sm-slide-show="2" data-xs-slide-show="2">
             @foreach($features as $feature)
             <div class="service-style1 col-xl-3">
                 <div class="service-body">
@@ -358,7 +360,7 @@
 <section class="space-extra-bottom space-extra-top pt-50">
     <div class="container">
         <div class="row gx-80">
-            <div class="col-lg-6 pb-3 pb-xl-0">
+            <div class="col-lg-6 pb-3 pb-xl-0 d-none-mobile">
                 <div class="img-box3">
                     <div class="img-1 mega-hover">
                         <img style="min-height:768px; object-fit: cover;" src="{{ asset('selected/assets/img/about/bg.jpg') }}" alt="FAQ">
