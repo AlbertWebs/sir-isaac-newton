@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('class_subject', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id')->constrained()->onDelete('cascade');
+            $table->foreignId('school_class_id')->constrained()->onDelete('cascade');
             $table->foreignId('subject_id')->constrained()->onDelete('cascade');
             $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
             $table->string('academic_year');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
             
-            $table->unique(['class_id', 'subject_id', 'academic_year'], 'unique_class_subject_year');
+            $table->unique(['school_class_id', 'subject_id', 'academic_year'], 'unique_class_subject_year');
         });
     }
 

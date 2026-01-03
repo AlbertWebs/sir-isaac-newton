@@ -19,7 +19,10 @@ class SettingsController extends Controller
         }
 
         $settings = Setting::orderBy('group')->orderBy('key')->get()->groupBy('group');
-        $schoolInfo = SchoolInformation::firstOrCreate([]); // Fetch or create school information
+        $schoolInfo = SchoolInformation::firstOrCreate([
+            'name' => 'Sir Isaac Newton School', 
+            'status' => 'active'
+        ]); // Fetch or create school information
         
         return view('settings.index', compact('settings', 'schoolInfo'));
     }
@@ -54,7 +57,10 @@ class SettingsController extends Controller
             'receipt_logo' => ['nullable', 'image', 'max:2048'], // 2MB max
         ]);
 
-        $schoolInfo = SchoolInformation::firstOrCreate([]);
+        $schoolInfo = SchoolInformation::firstOrCreate([
+            'name' => 'Sir Isaac Newton School',
+            'status' => 'active'
+        ]);
 
         // Handle normal logo upload
         if ($request->hasFile('logo')) {

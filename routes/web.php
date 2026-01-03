@@ -84,10 +84,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     // Route::resource('courses', CourseController::class);
 
     // Course Registrations (Removed as per user request for class-based system)
-    // Route::get('/course-registrations', [CourseRegistrationController::class, 'index'])->name('course-registrations.index');
-    // Route::get('/course-registrations/create', [CourseRegistrationController::class, 'create'])->name('course-registrations.create');
-    // Route::post('/course-registrations', [CourseRegistrationController::class, 'store'])->name('course-registrations.store');
-    // Route::delete('/course-registrations/{courseRegistration}', [CourseRegistrationController::class, 'destroy'])->name('course-registrations.destroy');
+    Route::get('/course-registrations', [CourseRegistrationController::class, 'index'])->name('course-registrations.index');
+    Route::get('/course-registrations/create', [CourseRegistrationController::class, 'create'])->name('course-registrations.create');
+    Route::post('/course-registrations', [CourseRegistrationController::class, 'store'])->name('course-registrations.store');
+    Route::delete('/course-registrations/{courseRegistration}', [CourseRegistrationController::class, 'destroy'])->name('course-registrations.destroy');
 
     // Billing
     Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
@@ -120,7 +120,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/reports/export-expenses', [ReportController::class, 'exportExpenses'])->name('reports.export-expenses');
     Route::get('/reports/export-students-registered', [ReportController::class, 'exportStudentsRegistered'])->name('reports.export-students-registered');
     Route::get('/reports/export-balances', [ReportController::class, 'exportBalances'])->name('reports.export-balances');
-    // Route::get('/reports/export-course-registrations', [ReportController::class, 'exportCourseRegistrations'])->name('reports.export-course-registrations'); // Removed
+    Route::get('/reports/export-course-registrations', [ReportController::class, 'exportCourseRegistrations'])->name('reports.export-course-registrations'); // Removed
     Route::get('/reports/export-bank-deposits', [ReportController::class, 'exportBankDeposits'])->name('reports.export-bank-deposits');
     Route::get('/reports/export-receipts', [ReportController::class, 'exportReceipts'])->name('reports.export-receipts');
 

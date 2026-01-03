@@ -8,7 +8,7 @@
     <div class="bg-white rounded-lg shadow-md p-6">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Edit Bank Deposit</h2>
 
-        <form method="POST" action="{{ route('bank-deposits.update', $bankDeposit->id) }}">
+        <form method="POST" action="{{ route('admin.bank-deposits.update', $bankDeposit->id) }}">
             @csrf
             @method('PUT')
 
@@ -129,7 +129,7 @@
 
             <!-- Submit Buttons -->
             <div class="flex justify-end space-x-4">
-                <a href="{{ route('bank-deposits.show', $bankDeposit->id) }}" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                <a href="{{ route('admin.bank-deposits.show', $bankDeposit->id) }}" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                     Cancel
                 </a>
                 <button 
@@ -162,7 +162,7 @@ function bankDepositForm() {
             this.balanceMessage = '';
 
             try {
-                const response = await fetch(`{{ route('bank-deposits.get-balance') }}?source_account=${this.sourceAccount}`, {
+                const response = await fetch(`{{ route('admin.bank-deposits.get-balance') }}?source_account=${this.sourceAccount}`, {
                     headers: {
                         'Accept': 'application/json',
                         'X-Requested-With': 'XMLHttpRequest',

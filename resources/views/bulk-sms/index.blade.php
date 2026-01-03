@@ -181,7 +181,7 @@
         @endif
 
         <div class="bg-white rounded-xl shadow-lg p-6">
-            <form method="POST" action="{{ route('bulk-sms.send') }}" id="bulkSmsForm" x-data="bulkSms()" onsubmit="return window.bulkSmsFormSubmit(event)">
+            <form method="POST" action="{{ route('admin.bulk-sms.send') }}" id="bulkSmsForm" x-data="bulkSms()" onsubmit="return window.bulkSmsFormSubmit(event)">
                 @csrf
 
                 <!-- Recipient Type -->
@@ -344,7 +344,7 @@ function bulkSms() {
                                 placeholder: 'Search and select a student...',
                                 allowClear: true,
                                 ajax: {
-                                    url: '{{ route("bulk-sms.students") }}',
+                                    url: '{{ route("admin.bulk-sms.students") }}',
                                     dataType: 'json',
                                     delay: 250,
                                     data: function (params) {
@@ -373,7 +373,7 @@ function bulkSms() {
                                 placeholder: 'Search and select a teacher...',
                                 allowClear: true,
                                 ajax: {
-                                    url: '{{ route("bulk-sms.teachers") }}',
+                                    url: '{{ route("admin.bulk-sms.teachers") }}',
                                     dataType: 'json',
                                     delay: 250,
                                     data: function (params) {

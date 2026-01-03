@@ -9,7 +9,7 @@
         <h2 class="text-2xl font-bold text-gray-900">Course Registrations</h2>
         <p class="text-sm text-gray-600 mt-1">View students grouped by course</p>
     </div>
-    <a href="{{ route('course-registrations.create') }}" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg flex items-center">
+    <a href="{{ route('admin.course-registrations.create') }}" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg flex items-center">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
         </svg>
@@ -143,7 +143,7 @@
                                                 </svg>
                                             </a>
                                             <form 
-                                                action="{{ route('course-registrations.destroy', $registration->id) }}" 
+                                                action="{{ route('admin.course-registrations.destroy', $registration->id) }}" 
                                                 method="POST" 
                                                 class="inline" 
                                                 onsubmit="return confirm('Are you sure you want to remove this registration?')"
@@ -179,7 +179,7 @@
         </svg>
         <p class="text-gray-500 text-lg mb-2">No course registrations found.</p>
         <p class="text-gray-400 text-sm mb-6">Start by registering students for courses.</p>
-        <a href="{{ route('course-registrations.create') }}" class="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <a href="{{ route('admin.course-registrations.create') }}" class="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             Register First Course
         </a>
     </div>

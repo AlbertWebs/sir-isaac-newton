@@ -45,7 +45,7 @@
                 x-transition:enter-end="opacity-100 transform scale-100"
                 class="mt-6"
             >
-                <form method="POST" action="{{ route('role-permissions.update', $role->id) }}" id="form-role-{{ $role->id }}">
+                <form method="POST" action="{{ route('admin.role-permissions.update', $role->id) }}" id="form-role-{{ $role->id }}">
                     @csrf
                     @method('PUT')
                     
@@ -122,7 +122,7 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <a href="{{ route('users.index') }}" class="flex items-center p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg">
+            <a href="{{ route('admin.users.index') }}" class="flex items-center p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>

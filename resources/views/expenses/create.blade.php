@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto">
-    <form method="POST" action="{{ route('expenses.store') }}" id="expenseForm">
+    <form method="POST" action="{{ route('admin.expenses.store') }}" id="expenseForm">
         @csrf
         
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -162,7 +162,7 @@
             <div class="bg-gray-50 px-8 py-6 border-t border-gray-200">
                 <div class="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4">
                     <a 
-                        href="{{ route('expenses.index') }}" 
+                        href="{{ route('admin.expenses.index') }}" 
                         class="px-6 py-3 border-2 border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 transition duration-200 text-center"
                     >
                         Cancel

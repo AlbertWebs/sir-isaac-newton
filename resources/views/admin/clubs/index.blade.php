@@ -10,7 +10,7 @@
         <p class="text-sm text-gray-600 mt-1">Manage extracurricular clubs and activities</p>
     </div>
     @if(auth()->user()->hasPermission('clubs.create'))
-    <a href="{{ route('clubs.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+    <a href="{{ route('admin.clubs.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
         </svg>
@@ -207,7 +207,7 @@
                                 <p class="text-gray-600 text-lg font-medium mb-2">No clubs found</p>
                                 <p class="text-gray-500 text-sm mb-6">Get started by creating your first club</p>
                                 @if(auth()->user()->hasPermission('clubs.create'))
-                                <a href="{{ route('clubs.create') }}" class="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-lg hover:from-teal-700 hover:to-cyan-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                <a href="{{ route('admin.clubs.create') }}" class="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-lg hover:from-teal-700 hover:to-cyan-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                     </svg>

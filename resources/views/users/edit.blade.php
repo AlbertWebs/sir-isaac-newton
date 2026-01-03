@@ -6,7 +6,7 @@
 @section('content')
 <div class="max-w-2xl mx-auto">
     <div class="bg-white rounded-lg shadow-md p-6">
-        <form method="POST" action="{{ route('users.update', $user->id) }}">
+        <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
             @csrf
             @method('PUT')
             <div class="space-y-6">
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="mt-6 flex justify-end space-x-4">
-                <a href="{{ route('users.index') }}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancel</a>
+                <a href="{{ route('admin.users.index') }}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancel</a>
                 <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Update User</button>
             </div>
         </form>

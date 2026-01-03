@@ -306,6 +306,12 @@
                 border-color: #cd9933 !important; /* Keep theme color border on hover */
                 box-shadow: 0 0 15px rgba(205, 153, 51, 0.8); /* More prominent shadow on hover */
             }
+
+            .header-social.style-white a i {
+                color: #ffffff !important; /* Force icon color to white */
+                font-weight: 900 !important; /* Make icon bolder */
+                font-size: 1em !important; /* Ensure consistent icon size */
+            }
         }
     </style>
     

@@ -62,7 +62,7 @@
     <div class="bg-white rounded-lg shadow-md p-6">
         <h2 class="text-xl font-semibold text-gray-900 mb-6">Select Data to Purge</h2>
 
-        <form method="POST" action="{{ route('data-purge.purge') }}" id="purgeForm" x-data="{ showConfirm: false }">
+        <form method="POST" action="{{ route('admin.data-purge.purge') }}" id="purgeForm" x-data="{ showConfirm: false }">
             @csrf
 
             <!-- Purge All Option -->

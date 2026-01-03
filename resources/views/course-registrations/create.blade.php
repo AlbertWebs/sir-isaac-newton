@@ -10,7 +10,7 @@
             <h2 class="text-2xl font-bold text-gray-900">Register Student for Courses</h2>
             <p class="text-sm text-gray-600 mt-1">Create a new course registration</p>
         </div>
-        <a href="{{ route('course-registrations.index') }}" class="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors flex items-center">
+        <a href="{{ route('admin.course-registrations.index') }}" class="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
             </svg>
@@ -20,7 +20,7 @@
     
     <div class="bg-white rounded-lg shadow-md p-6">
 
-        <form method="POST" action="{{ route('course-registrations.store') }}">
+        <form method="POST" action="{{ route('admin.course-registrations.store') }}">
             @csrf
 
             <!-- Student Selection -->
@@ -107,7 +107,7 @@
 
             <!-- Form Actions -->
             <div class="flex justify-end space-x-4">
-                <a href="{{ route('course-registrations.index') }}" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                <a href="{{ route('admin.course-registrations.index') }}" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                     Cancel
                 </a>
                 <button 

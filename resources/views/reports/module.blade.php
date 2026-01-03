@@ -58,7 +58,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Students Registered Report -->
             <a 
-                :href="buildReportUrl('{{ route('reports.export-students-registered') }}')"
+                :href="buildReportUrl('{{ route('admin.reports.export-students-registered') }}')"
                 class="group bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-xl shadow-lg p-6 text-center transition-all transform hover:scale-105 hover:shadow-2xl"
             >
                 <div class="mb-4">
@@ -72,7 +72,7 @@
 
             <!-- Balances Report -->
             <a 
-                :href="buildReportUrl('{{ route('reports.export-balances') }}')"
+                :href="buildReportUrl('{{ route('admin.reports.export-balances') }}')"
                 class="group bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-xl shadow-lg p-6 text-center transition-all transform hover:scale-105 hover:shadow-2xl"
             >
                 <div class="mb-4">
@@ -86,7 +86,7 @@
 
             <!-- Fee Payment Report -->
             <a 
-                :href="buildReportUrl('{{ route('reports.export-payments') }}')"
+                :href="buildReportUrl('{{ route('admin.reports.export-payments') }}')"
                 class="group bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-xl shadow-lg p-6 text-center transition-all transform hover:scale-105 hover:shadow-2xl"
             >
                 <div class="mb-4">
@@ -100,7 +100,7 @@
 
             <!-- Expenses Report -->
             <a 
-                :href="buildReportUrl('{{ route('reports.export-expenses') }}')"
+                :href="buildReportUrl('{{ route('admin.reports.export-expenses') }}')"
                 class="group bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-xl shadow-lg p-6 text-center transition-all transform hover:scale-105 hover:shadow-2xl"
             >
                 <div class="mb-4">
@@ -114,7 +114,7 @@
 
             <!-- Full Financial Report -->
             <a 
-                :href="buildReportUrl('{{ route('reports.export') }}')"
+                :href="buildReportUrl('{{ route('admin.reports.export') }}')"
                 class="group bg-gradient-to-br from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 rounded-xl shadow-lg p-6 text-center transition-all transform hover:scale-105 hover:shadow-2xl"
             >
                 <div class="mb-4">
@@ -128,7 +128,7 @@
 
             <!-- Course Registrations Report -->
             <a 
-                :href="buildReportUrl('{{ route('reports.export-course-registrations') }}')"
+                :href="buildReportUrl('{{ route('admin.reports.export-course-registrations') }}')"
                 class="group bg-gradient-to-br from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 rounded-xl shadow-lg p-6 text-center transition-all transform hover:scale-105 hover:shadow-2xl"
             >
                 <div class="mb-4">
@@ -142,7 +142,7 @@
 
             <!-- Bank Deposits Report -->
             <a 
-                :href="buildReportUrl('{{ route('reports.export-bank-deposits') }}')"
+                :href="buildReportUrl('{{ route('admin.reports.export-bank-deposits') }}')"
                 class="group bg-gradient-to-br from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 rounded-xl shadow-lg p-6 text-center transition-all transform hover:scale-105 hover:shadow-2xl"
             >
                 <div class="mb-4">
@@ -156,7 +156,7 @@
 
             <!-- Receipts Report -->
             <a 
-                :href="buildReportUrl('{{ route('reports.export-receipts') }}')"
+                :href="buildReportUrl('{{ route('admin.reports.export-receipts') }}')"
                 class="group bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 rounded-xl shadow-lg p-6 text-center transition-all transform hover:scale-105 hover:shadow-2xl"
             >
                 <div class="mb-4">

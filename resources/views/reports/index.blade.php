@@ -26,7 +26,7 @@
         <div class="flex flex-wrap items-center gap-2 sm:gap-3">
             <!-- Export Full Report -->
             <a 
-                href="{{ route('reports.export', request()->query()) }}" 
+                href="{{ route('admin.reports.export', request()->query()) }}" 
                 class="px-4 py-2.5 sm:px-6 sm:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center shadow-md hover:shadow-lg text-sm sm:text-base"
             >
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@
             </a>
             <!-- Export Payments -->
             <a 
-                href="{{ route('reports.export-payments', request()->query()) }}" 
+                href="{{ route('admin.reports.export-payments', request()->query()) }}" 
                 class="px-4 py-2.5 sm:px-6 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center shadow-md hover:shadow-lg text-sm sm:text-base"
             >
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@
             </a>
             <!-- Export Expenses -->
             <a 
-                href="{{ route('reports.export-expenses', request()->query()) }}" 
+                href="{{ route('admin.reports.export-expenses', request()->query()) }}" 
                 class="px-4 py-2.5 sm:px-6 sm:py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center shadow-md hover:shadow-lg text-sm sm:text-base"
             >
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@
     <!-- Filter Section -->
     <div class="bg-white rounded-lg shadow-md p-6 mb-6 print:hidden">
         <h2 class="text-xl font-semibold text-gray-900 mb-4">Report Filters</h2>
-        <form method="GET" action="{{ route('reports.index') }}" class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-4">
+        <form method="GET" action="{{ route('admin.reports.index') }}" class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-4">
             <div>
                 <label for="period" class="block text-sm font-medium text-gray-700 mb-2">Quick Period</label>
                 <select 

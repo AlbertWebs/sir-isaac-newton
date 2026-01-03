@@ -8,7 +8,7 @@
     <div class="bg-white rounded-lg shadow-md p-6">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-900">Deposit Details</h2>
-            <a href="{{ route('bank-deposits.index') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Back</a>
+            <a href="{{ route('admin.bank-deposits.index') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Back</a>
         </div>
 
         <div class="space-y-6">
@@ -46,7 +46,7 @@
 
             @if(auth()->user()->isSuperAdmin())
             <div class="flex justify-end space-x-4 pt-4 border-t">
-                <a href="{{ route('bank-deposits.edit', $bankDeposit->id) }}" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Edit</a>
+                <a href="{{ route('admin.bank-deposits.edit', $bankDeposit->id) }}" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Edit</a>
             </div>
             @endif
         </div>

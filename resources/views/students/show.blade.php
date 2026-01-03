@@ -46,7 +46,7 @@
                 
                 <!-- Quick Actions -->
                 <div class="flex flex-wrap gap-2">
-                    <a href="{{ route('course-registrations.create') }}?student_id={{ $student->id }}" class="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg text-sm font-medium flex items-center gap-1.5">
+                    <a href="{{ route('admin.course-registrations.create') }}?student_id={{ $student->id }}" class="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg text-sm font-medium flex items-center gap-1.5">
                         <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                         </svg>
@@ -58,7 +58,7 @@
                         </svg>
                         Process Payment
                     </a>
-                    <a href="{{ route('students.edit', $student->id) }}" class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-lg hover:from-amber-600 hover:to-orange-700 transition-all shadow-md hover:shadow-lg text-sm font-medium flex items-center gap-1.5">
+                    <a href="{{ route('admin.students.edit', $student->id) }}" class="px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-lg hover:from-amber-600 hover:to-orange-700 transition-all shadow-md hover:shadow-lg text-sm font-medium flex items-center gap-1.5">
                         <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
@@ -496,7 +496,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                     </svg>
                     <p class="text-gray-500 mb-4">No courses registered for this student.</p>
-                    <a href="{{ route('course-registrations.create') }}?student_id={{ $student->id }}" class="inline-block px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-semibold">
+                    <a href="{{ route('admin.course-registrations.create') }}?student_id={{ $student->id }}" class="inline-block px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-semibold">
                         Register Courses
                     </a>
                 </div>
@@ -505,7 +505,7 @@
 
             <!-- Quick Payment Tab -->
             <div x-show="activeTab === 'quick-payment'" x-data="quickPaymentForm()">
-                <form method="POST" action="{{ route('billing.store') }}" class="space-y-6">
+                <form method="POST" action="{{ route('admin.billing.store') }}" class="space-y-6">
                     @csrf
                     <input type="hidden" name="student_id" value="{{ $student->id }}">
 

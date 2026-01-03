@@ -52,7 +52,10 @@ class SchoolController extends Controller
         $info = SchoolInformation::where('status', 'active')->first();
 
         if (!$info) {
-            $info = SchoolInformation::create($request->all());
+            $info = SchoolInformation::create(array_merge($request->all(), [
+                'name' => $request->input('name', 'Sir Isaac Newton School'), // Provide a default name
+                'status' => 'active', // Ensure status is set
+            ]));
         } else {
             $info->update($request->all());
         }
